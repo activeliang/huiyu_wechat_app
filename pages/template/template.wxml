@@ -1,0 +1,17 @@
+<!-- 这里是整个小程序的模板集中地 -->
+
+<!-- 产品列表模板（一行一个产品） -->
+<template name="product_list">
+    <view class='product-list'>
+    <block wx:for="{{products}}">
+      <view bindtap='navigationTo' data-id="{{item.id}}" class='product-item'>
+        <view class='product-image'><image src='{{item.image}}'></image></view>
+        <view class='product-detail'>
+          <view class='product-title'>{{item.title}}</view>
+          <view class='product-subtitle'>{{item.sub_title}}</view>
+          <view class='product-price'>{{item.price}}</view>
+        </view>
+      </view>
+    </block>
+  </view>
+</template>

@@ -1,0 +1,17 @@
+<!--pages/welcome/index.wxml-->
+<!-- 首页 -->
+
+<view class='container-fluid'>
+  <!-- 搜索框 -->
+  <view class='search-item'>
+    <button bindtap='gotosearch' class='search-btn'><icon class='search-icon' type='search' size='12'/>搜索商品</button>
+  </view>
+
+  <!-- 轮播图 -->
+
+
+<view id="outer" bind:touchmove="handleTap1">
+  outer view
+</view>
+  
+</view>

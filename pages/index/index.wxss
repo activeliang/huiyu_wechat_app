@@ -1,0 +1,21 @@
+/* pages/welcome/index.wxss */
+
+.search-item {
+  background: #ec702e;
+  padding:12rpx;
+}
+.search-btn {
+  border-radius:45px;
+  height:45rpx;
+  line-height:47rpx;
+  font-size:25rpx;
+  color: #999;
+}
+.search-icon {
+  font-size:27rpx;
+  margin-right: 10rpx;
+  position:relative;
+  top:5rpx;
+
+}
+

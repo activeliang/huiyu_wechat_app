@@ -1,0 +1,40 @@
+<!--pages/category/category.wxml-->
+<view class='container-fluid' >
+  <!-- 左侧栏 -->
+  <scroll-view scroll-y style="height: {{windowH}}px" class='nav-lef'>
+    <block wx:for="{{category_tree.tree}}">
+      <view class='root-title-left {{index == currentScrollItem ? "currentNavLeft" : ""}} {{currentNavLeft == item.id ? "currentNavLeft" : ""}}' id='{{item.id}}' bindtap="bindLeftTap">{{item.title}}</view>
+    </block>
+  </scroll-view>
+
+  <!-- 右侧栏 -->
+  <scroll-view scroll-y scroll-with-animation bindscroll="scroll" style="height: {{windowH}}px" scroll-into-view="{{rightToView}}" class='nav-right' lower-threshold="30">
+    <block wx:for="{{category_tree.tree}}" wx:for-item="root">
+
+      <view id='nav_right-{{root.id}}' class="root-item">
+        <view class="line"></view>
+        <view class="root-title-right">{{root.title}}</view>
+
+        <view class="category-group">
+          <!-- 按当前分类的下一级分类来渲染 -->
+          <block wx:for="{{root.children}}" wx:for-item="children">
+            <view bindtap='navigationTo' data-id="{{children.id}}" data-title="{{children.title}}" class="category-item">
+              <view class="category-item-image"><image src='{{children.image}}'></image></view>
+              <view class="category-title">{{children.title}}</view>
+            </view>
+          </block>
+          <!-- 按当前分类下的产品来渲染 -->
+          <block wx:for="{{root.products}}">
+            <view class="category-item">
+              <view class="category-item-image"><image src='{{item.image}}'></image></view>
+              <view class="category-title">{{item.title}}</view>
+            </view>
+          </block>
+        </view>
+        
+      </view>
+    
+      
+    </block>
+  </scroll-view>
+</view>

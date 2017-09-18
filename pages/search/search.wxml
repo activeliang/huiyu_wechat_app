@@ -1,0 +1,33 @@
+<!--pages/search/search.wxml-->
+<!-- 引入模板 -->
+<import src="/pages/template/template.wxml"/>
+
+<!-- 搜索框组 -->
+<view class='search-group'>
+  <icon class='search-icon' type='search' size='20' ></icon>
+  <form bindsubmit="formSubmit">
+    <input class='search-input' name="searchKey" type='text' placeholder="搜索商品" focus confirm-type="search"></input>
+    <view class='search-info'><button formType="submit">搜索</button></view>
+  </form>
+</view>
+<!-- 搜索的辅助（热搜等） -->
+<view class='search-helper' style='display={{helper-show}}'>
+  <view class='search-item-group'>
+    <block wx:for="{{search-helper-item}}">
+      <view class='helper-item'>{{item.title}}</view>
+    </block>
+  </view>
+</view>
+<!-- 搜索历史记录 -->
+<view class='search-record'>
+<view class='helper-alert'>搜索历史</view>
+  <block wx:for="{{record}}">
+    <view class='record-item'>{{item.title}}</view>
+  </block>
+  <view class='destroy-record'>清空搜索记录</view>
+</view>
+<!-- 搜索结果列表 -->
+<view style='display: {{search_result_show}}' class='search-result'>
+    <template is="product_list" data="{{products: search_result}}"/>
+    <view class='search-empty'>{{searchPresent}}</view>
+</view>

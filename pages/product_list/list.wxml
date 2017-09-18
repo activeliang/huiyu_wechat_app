@@ -1,0 +1,11 @@
+<!--pages/product_list/list.wxml-->
+
+<!-- 引入模板 -->
+<import src="/pages/template/template.wxml"/>
+
+<!-- 分类下产品列表 -->
+<view class="container-fluid list-page">
+  <view class='line'></view>
+  <view class='category-title'>{{title}}</view>
+  <template is="product_list" data="{{products: product_list}}"/>
+</view>

@@ -1,0 +1,42 @@
+<!--pages/product_new/new.wxml-->  
+<!-- 选取图片框 -->
+<view class='label'>产品图片</view>
+<view class='img-selector'>
+  <view class='img-preview'>
+    <block wx:for="{{previewImgUrl}}">
+      <image src='{{item}}' class='preview-item' />
+    </block>
+  </view>
+  <button bindtap='select_image' class='select-btn' >+</button>
+</view>
+
+<view class='label'>小视频</view>
+<view class='video-selector'>
+  <view style="display: {{previewVideoDisplay}}" class='video-preview'>
+    <video src='{{previewVideoUrl}}' controls ></video>
+    <view class='videoDetail'>
+     <view class='video-detail-item'>视频长度：{{videoLength}} 秒</view>
+     <view class='video-detail-item'>视频大小：{{videoSize / 1000000}} MB </view>
+    </view>
+  </view>
+  <button bindtap='select_video' class='select-btn' >+</button>
+</view>
+<!-- 输入表单 -->
+<form bindsubmit="formSubmit">
+  <view class='label-item'>产品名</view>
+  <input class='input-item' name="title" type='text' confirm-type="next"></input>
+  <view class='label-item'>副标题</view>
+  <input class='input-item' name="sub_title" type='text' confirm-type="next"></input>
+  <view class='label-item'>详情</view>
+  <input class='input-item' name="description" type='text' confirm-type="next"></input>
+  <view class='label-item'>价格</view>
+  <input class='input-item' name="price" type='digit' confirm-type="next"></input>
+  <view class="switch-item" wx:if="{{formHelperInStock}}">有现货？<switch checked bindchange="change_in_stock"/></view>
+  <view class="switch-item" wx:else>有现货？<switch bindchange="change_in_stock"/></view>
+  <view class="switch-item" wx:if="{{formHelperIsHide}}">暂时不上架<switch checked bindchange="change_is_hide"/></view>
+  <view class="switch-item" wx:else>暂时不上架<switch bindchange="change_is_hide"/></view>
+  <view class="switch-item" wx:if="{{formHelperIndexShow}}">在首页推广<switch checked bindchange="change_index_show"/></view>
+  <view class="switch-item" wx:else>在首页推广<switch bindchange="change_index_show"/></view>
+  <view class='search-info'><button formType="submit">提交数据</button></view>
+  
+</form>
