@@ -12,13 +12,15 @@ Page({
     formHelperIsHide: false,
     formHelperIndexShow: false,
     formHelperInStock: true,
-    multiIndex: [0, 0]
+    multiIndex: [0, 0],
+    currentId: ""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // 加载服务器分类数据
     var that = this;
     wx.request({
       url: "http://localhost:3000/categories/for_wechat_picker",
@@ -42,7 +44,7 @@ Page({
           multiArray: res.data.default_arr,
           title_item_arr: title_item_arr,
           id_item_arr: id_item_arr,
-          currentIndex: res.data.current_index
+          currentId: res.data.current_index
         })
         console.log(res)
       }
@@ -179,13 +181,14 @@ Page({
     console.log(this.data.tempFilePaths)
     var that = this;
     var value = e.detail.value;
+    console.log("即将要上传的分类ID:", this.data.currentId)
     wx.request({
       url: 'http://localhost:3000/products/create_form_wechat',
       method: "POST",
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
       },
-      data: { title: value.title, description: value.description, sub_title: value.sub_title, index_show: value.index_show, in_stock: value.in_stock, is_hide: value.is_hide, weight: value.weight, price: value.price },
+      data: { title: value.title, description: value.description, sub_title: value.sub_title, index_show: that.data.formHelperIndexShow, in_stock: that.data.formHelperInStock, is_hide: that.data.formHelperIsHide, weight: value.weight, price: value.price, category_id: that.data.currentId },
       success: function (res) {
         if (res.data.status == "ok") {
           console.log("新增成功")
@@ -194,7 +197,7 @@ Page({
           console.log(that.data.tempFilePaths)
           // 进行图片和视频上传
           console.log(that.data.previewVideoUrl)
-          common.uploadImgAndVideo(id, that.data.tempFilePaths, that.data.previewVideoUrl, 1)
+          common.uploadImgAndVideo(id, that.data.tempFilePaths, that.data.previewVideoUrl, 0)
         } else {
           wx.showModal({
             title: '提示',
@@ -219,7 +222,8 @@ Page({
     console.log( "当前ID:", currentId)
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
-      currentIndex: e.detail.value
+      currentIndex: e.detail.value,
+      currentId: currentId
     })
   },
 

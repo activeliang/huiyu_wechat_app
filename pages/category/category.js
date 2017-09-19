@@ -18,33 +18,35 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {wx.showShareMenu({
-  withShareTicket: true
-})
-
-
+  onLoad: function (options) {
     
-    this.setData({
-      category_tree: defaultData.category_tree
+    wx.showShareMenu({
+     withShareTicket: true
     })
 
-    console.log("wftc", defaultData.category_tree.scroll_detail)
 
     
-    // var that = this;
-    // wx.request({
-    //   url: 'http://localhost:3000/categories.json',
-    //   method: "GET",
-    //   header: {
-    //     'content-type': 'application/json' // 默认值
-    //   },
-    //   success: function (res) {
-    //     that.setData({
-    //       category_tree: res.data
-    //     })
-    //     console.log(res.data)
-    //   }
+    // this.setData({
+    //   category_tree: defaultData.category_tree
     // })
+
+    // console.log("wftc", defaultData.category_tree.scroll_detail)
+
+    
+    var that = this;
+    wx.request({
+      url: 'http://localhost:3000/categories.json',
+      method: "GET",
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        that.setData({
+          category_tree: res.data
+        })
+        console.log(res.data)
+      }
+    })
     
 
     var that = this;
