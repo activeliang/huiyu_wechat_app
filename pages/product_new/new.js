@@ -11,14 +11,42 @@ Page({
     previewVideoDisplay: "none",
     formHelperIsHide: false,
     formHelperIndexShow: false,
-    formHelperInStock: true
+    formHelperInStock: true,
+    multiIndex: [0, 0]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var that = this;
+    wx.request({
+      url: "http://localhost:3000/categories/for_wechat_picker",
+      success: function(res){
+        var i = 0,title_arr = [],id_arr = [],title_item_arr = [],id_item_arr = [];
+        for (i in res.data.title_arr){
+          title_arr.push(res.data.title_arr[i][0])
+          id_arr.push(res.data.id_arr[i][0])
+          title_item_arr.push(res.data.title_arr[i][1])
+          id_item_arr.push(res.data.id_arr[i][1])
+          i++
+        }
+        console.log("以下是title_arr")
+        console.log(title_arr)
+        console.log(id_arr)
+        console.log(title_item_arr)
+        console.log(id_item_arr)
+        that.setData({
+          title_arr: res.data.title_arr,
+          id_arr: res.data.id_arr,
+          multiArray: res.data.default_arr,
+          title_item_arr: title_item_arr,
+          id_item_arr: id_item_arr,
+          currentIndex: res.data.current_index
+        })
+        console.log(res)
+      }
+    })
   },
 
   /**
@@ -177,5 +205,37 @@ Page({
     })
 
     
-  }
+  },
+  // 处理选择器picker
+  bindMultiPickerChange: function (e) {
+    var currentId = ""
+    if (e.detail.value[1] != 0) {
+      console.log("选择了第一个")
+      currentId = this.data.id_item_arr[e.detail.value[0]][e.detail.value[1]]
+      // console.log(this.data.id_item_arr)
+    } else {
+      currentId = this.data.id_arr[e.detail.value[0]][0]
+    }
+    console.log( "当前ID:", currentId)
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      currentIndex: e.detail.value
+    })
+  },
+
+  // 更新选择器选项
+  bindMultiPickerColumnChange: function (e) {
+    console.log('修改的列为', e.detail.column, '，值为', e.detail.value);
+    var data = {
+      multiArray: this.data.multiArray,
+      multiIndex: this.data.multiIndex
+    };
+    data.multiIndex[e.detail.column] = e.detail.value;
+    if (e.detail.column == 0) {
+        data.multiArray[1] = this.data.title_item_arr[data.multiIndex[0]]
+        data.multiIndex[1] = 0;
+    }
+    this.setData(data);
+  },
+  
 })

@@ -9,9 +9,24 @@
 
   <!-- 轮播图 -->
 
+<view class="section">
+  <view class="section__title">多列选择器</view>
+  <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+    <view class="picker">
+      当前选择：{{multiArray[0][multiIndex[0]]}}，{{multiArray[1][multiIndex[1]]}}
+    </view>
+  </picker>
+</view>
 
-<view id="outer" bind:touchmove="handleTap1">
-  outer view
+<view class="section">
+  <view class="section__title">普通选择器</view>
+  <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+    <view class="picker">
+      当前选择：{{array[index]}}
+    </view>
+  </picker>
+</view>
+
 </view>
   
-</view>
+
