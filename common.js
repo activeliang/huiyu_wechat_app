@@ -5,11 +5,11 @@ function uploadImgAndVideo(id, imgPath, videoPath, i) {
   console.log(i < imgPath.length )
   if (i < imgPath.length ){
     wx.uploadFile({
-      url: 'http://localhost:3000/products/' + id + '/update_form_wechat',
+      url: 'http://localhost:3000/products/' + id + '/update_product_image',
       method: "POST",
       header: { 'content-type': 'multipart/form-data' },
       filePath: imgPath[i],
-      name: 'images[]',
+      name: 'image',
       success: function (res) {
         console.log("上传图片")
         console.log(res.data)
@@ -18,7 +18,7 @@ function uploadImgAndVideo(id, imgPath, videoPath, i) {
       }
     })
     i++;
-  } else {
+  } else if (videoPath != undefined ){
     uploadVideo(id, videoPath)
   }
 
