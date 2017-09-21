@@ -7,7 +7,8 @@
     "pages/product_list/list",
     "pages/product/detail",
     "pages/search/search",
-    "pages/product_new/new"
+    "pages/product_new/new",
+    "pages/category_new/new"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -181,6 +181,13 @@ Page({
       
     })
     console.log('../product_list/list?title=' + currentItem.title + "&id=" + currentItem.id)
+  },
+
+  navigationToProduct: function(e) {
+    let currentItem = e && e.currentTarget.dataset;
+    wx.navigateTo({
+      url: '/pages/product/detail?id=' + currentItem.id
+    })
   }
   
 })

@@ -12,11 +12,23 @@ function uploadImgAndVideo(id, imgPath, videoPath, i) {
       filePath: imgPath[i],
       name: 'image',
       success: function (res) {
+        console.log(res)
         console.log("上传图片")
         console.log(res.data)
         console.log("成功啦" + i)
         console.log("文件地址：", id, imgPath, videoPath, i)
         uploadImgAndVideo(id, imgPath, videoPath, i)
+      },
+      complete: function(){
+        if (i = imgPath.length - 1){
+          if (videoPath == undefined){
+            wx.hideLoading()
+            wx.showModal({
+              title: '提示',
+              content: '提交成功！'
+            })
+          }
+        }
       }
     })
     i++;
@@ -38,6 +50,11 @@ function uploadVideo(id, videoPath) {
     success: function(res){
       console.log("上传视频")
       console.log(res.data)
+      wx.hideLoading()
+      wx.showModal({
+        title: '提示',
+        content: '提交成功！'
+      })
     }
   })
 }

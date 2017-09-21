@@ -4,7 +4,7 @@
 
 
 
-
+<!-- 多列选择器 -->
 <view class="section">
   <view class="section__title">多列选择器</view>
   <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
@@ -12,8 +12,34 @@
       当前选择：{{multiArray[0][multiIndex[0]]}}，{{multiArray[1][multiIndex[1]]}}
     </view>
   </picker>
+  <button bindtap='edit_category' class='category-option-btn'>编辑分类</button>
+  <button bindtap='go_to_category_new' class='category-option-btn'>新增分类</button>
 </view>
 
+<!-- 分类的CRUD  -->
+<!-- 新增、编辑分类使用的表单 -->
+<view style='display: {{categoryFormDisplay}}' class="section">
+  <view class="section__title">新增分类</view>
+  <picker class='picker-input' bindchange="bindPickerChangeForCategoryNew" value="{{pickerIndex}}" range="{{category_new_title_arr}}">
+    <view class="picker">
+      所属分类：{{category_new_title_arr[pickerIndex]}}
+    </view>
+  </picker>
+             <!-- 选取图片 -->
+  <view class='select-category-img'>
+    <image style='display: {{categoryImgDisplay}}' bindtap='select_category_image' class='category-img' src='{{selectedCategoryImgUrl}}'></image>
+    <button bindtap='select_category_image' class='select-btn' style='display: {{categoryImgBtn}}' >+</button>
+  </view>
+             <!-- 表单 -->
+  <view class='category-input-group'>
+  <form bindsubmit="formSubmitForCategoryNew">
+    <input class='title-input' name="title" type='text' value='{{categoryTitleInput}}' placeholder="尽量四字内" focus confirm-type="search"></input>
+    <slider bindchange="change_category_weight" max='20' value="{{editCategoryWeight}}" show-value step='1'></slider>
+    <button formType="submit">新增</button>
+  </form>
+  <button bindtap='hideForm' class='hide-category-form-btn'>收起</button>
+</view>
+</view>
 
 
 
@@ -29,7 +55,7 @@
   </view>
   <button bindtap='select_image' class='select-btn' >+</button>
 </view>
-
+<!-- 选取视频框 -->
 <view class='label'>小视频</view>
 <view class='video-selector'>
   <view style="display: {{previewVideoDisplay}}" class='video-preview'>
@@ -39,7 +65,7 @@
      <view class='video-detail-item'>视频大小：{{videoSize / 1000000}} MB </view>
     </view>
   </view>
-  <button bindtap='select_video' class='select-btn' >+</button>
+  <button bindtap='select_video' style='display: {{selectBtnDisplay}}' class='select-btn' >+</button>
 </view>
 <!-- 输入表单 -->
 <form bindsubmit="formSubmit">
@@ -48,7 +74,7 @@
   <view class='label-item'>副标题</view>
   <input class='input-item' name="sub_title" type='text' confirm-type="next"></input>
   <view class='label-item'>详情</view>
-  <input class='input-item' name="description" type='text' confirm-type="next"></input>
+  <textarea class='input-item' name="description" type='text' confirm-type="next"></textarea>
   <view class='label-item'>价格</view>
   <input class='input-item' name="price" type='digit' confirm-type="next"></input>
   <view class="switch-item" wx:if="{{formHelperInStock}}">有现货？<switch checked bindchange="change_in_stock"/></view>
@@ -57,6 +83,12 @@
   <view class="switch-item" wx:else>暂时不上架<switch bindchange="change_is_hide"/></view>
   <view class="switch-item" wx:if="{{formHelperIndexShow}}">在首页推广<switch checked bindchange="change_index_show"/></view>
   <view class="switch-item" wx:else>在首页推广<switch bindchange="change_index_show"/></view>
+
+  <view style='display: {{weight_slider_show}}' class='weight-slider'>
+    在首页的排序:
+    <slider bindchange="change_weight" max='50' show-value step='1'></slider>
+  </view>
+  
   <view class='search-info'><button formType="submit">提交数据</button></view>
   
 </form>
