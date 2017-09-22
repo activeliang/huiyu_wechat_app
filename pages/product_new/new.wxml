@@ -20,6 +20,7 @@
 <!-- 新增、编辑分类使用的表单 -->
 <view style='display: {{categoryFormDisplay}}' class="section">
   <view class="section__title">新增分类</view>
+  <!-- 选择一级分类用的选择器 -->
   <picker class='picker-input' bindchange="bindPickerChangeForCategoryNew" value="{{pickerIndex}}" range="{{category_new_title_arr}}">
     <view class="picker">
       所属分类：{{category_new_title_arr[pickerIndex]}}
@@ -86,7 +87,7 @@
 
   <view style='display: {{weight_slider_show}}' class='weight-slider'>
     在首页的排序:
-    <slider bindchange="change_weight" max='50' show-value step='1'></slider>
+    <slider bindchange="change_weight" max='50' value="{{editProductWeight}}" show-value step='1'></slider>
   </view>
   
   <view class='search-info'><button formType="submit">提交数据</button></view>

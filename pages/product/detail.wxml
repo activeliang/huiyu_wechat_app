@@ -1,4 +1,5 @@
 <!--pages/product/detail.wxml-->
+<button bindtap='navigationToProductEdit' data-id="{{currentProductId}}">编辑</button>
 <view class='container-fluid'> 
   <!-- 轮播图 -->
   <swiper indicator-dots="true" autoplay circular interval="3000" duration="800" >

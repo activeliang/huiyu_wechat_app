@@ -8,7 +8,8 @@
     "pages/product/detail",
     "pages/search/search",
     "pages/product_new/new",
-    "pages/category_new/new"
+    "pages/category_new/new",
+    "pages/profile/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -31,8 +32,8 @@
         "text": "分类"
       },
       {
-        "pagePath": "pages/product_new/new",
-        "text": "新增"
+        "pagePath": "pages/profile/index",
+        "text": "我的"
       }
     ]
   },

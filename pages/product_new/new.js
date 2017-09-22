@@ -1,4 +1,4 @@
-// pages/product_new/new.js
+ // pages/product_new/new.js
 // 引入公共模板js
 var common = require('../../common.js')
 
@@ -30,6 +30,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log("页面跳转信息", options)
     // 加载服务器根目录下分类数据
     var that = this;
     wx.request({
@@ -61,11 +62,15 @@ Page({
 
         })
         console.log(res)
+        console.log("测试：", that.data.id_arr)
+        // 判断当页面类型为编辑时的处理：
+          // 获取product详情：
+          that.renderProductDetail(options.id, options.pagetype);          
       }
     })
+    
 
     // 新增分类时获取一级分类列表
-    var that = this;
       wx.request({
         url: "http://localhost:3000/categories/for_wechat_category_new_picker",
         success: function (res) {
@@ -78,6 +83,58 @@ Page({
         }
       })
     
+  },
+  
+  renderProductDetail: function (id, pagetype){
+    if (id != undefined && pagetype == "edit") {
+      this.setData({
+        pageType: pagetype,
+        editProductId: id
+      })
+      console.log("当前页面类型为edit", id)
+      var that = this;
+      wx.request({
+        url: "http://localhost:3000/products/" + id + "/get_product_detail",
+        success: function (res) {
+          console.log("查询到的product_detail", res)
+          console.log("当前所有的页面变量：", that.data)
+          // 获取页面category索引值
+          var editProductcurrentCategoryIndex = that.renderCategoryIndex(res.data.category_id, that.data.id_arr)
+          var multiArray = that.data.multiArray ;
+          multiArray[1] = that.data.title_item_arr[editProductcurrentCategoryIndex[0]];
+          that.setData({
+            currentTitle: res.data.category_title,
+            multiIndex: editProductcurrentCategoryIndex,
+            currentIndex: editProductcurrentCategoryIndex,
+            categoryTitleInput: res.data.category_title,
+            pickerIndex: editProductcurrentCategoryIndex[0] + 1 ,
+            multiArray: multiArray
+          })
+          console.log("设置PickerIndex", that.data.multiArray[1], that.data.multiIndex[1] )
+          console.log("当前设置的title_input值", that.data.categoryTitleInput)
+
+          console.log("当前商品的分类标题：", editProductcurrentCategoryIndex, that.data.categoryTitleInput)
+        }
+      })
+    }
+  },
+
+  renderCategoryIndex: function(id, array){
+    console.log("成功调用callback函数")
+    console.log("检测分类变量和id_arr：", id, array)
+    var x, j;
+    for (x in array) {
+      for (j in array[x][1]) {
+        console.log("遍历项：", array[x][0], array[x][1][j])
+        if (array[x][0] == id || array[x][1][j] == id) {
+          console.log("当前找到的索引", x, j)
+          return new Array(parseInt(x), parseInt(j));
+          break;
+        }
+        
+      }
+     
+    }
   },
 
   /**
@@ -130,6 +187,7 @@ Page({
   },
   // 打开新增表单
   go_to_category_new: function () {
+    console.log("获取id_arr:", this);
     this.setData({
       categoryFormDisplay: "block",
       categoryType: "add",
@@ -148,11 +206,12 @@ Page({
       editCategoryTitle: this.data.currentTitle,
       categoryFormDisplay: "block",
       categoryType: "edit",
-      pickerIndex: this.data.currentIndex[0] + 1,
+      // pickerIndex: this.data.currentIndex[0] + 1,
       categoryTitleInput: this.data.currentTitle,
       categoryImgBtn: "block"
     })
-    console.log("当前选择的一级分类", this.data.currentIndex[0] + 1)
+    console.log("编辑时的Picker值：", this.data.currentIndex, this.data.pickerIndex)
+    // console.log("当前选择的一级分类", this.data.currentIndex[0] + 1)
     console.log("当前id:", this.data.currentId, this.data.currentTitle)
     let that = this;
     wx.request({
@@ -461,8 +520,8 @@ Page({
     };
     data.multiIndex[e.detail.column] = e.detail.value;
     if (e.detail.column == 0) {
-        data.multiArray[1] = this.data.title_item_arr[data.multiIndex[0]]
-        data.multiIndex[1] = 0;
+      data.multiArray[1] = this.data.title_item_arr[data.multiIndex[0]]
+      data.multiIndex[1] = 0;
     }
     this.setData(data);
   },

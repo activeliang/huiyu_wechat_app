@@ -11,6 +11,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({currentProductId: options.id})
     // 加载时向服务器请求产品详情数据
     var that = this;
     console.log("http://localhost:3000/products/" + options.id + ".json")
@@ -82,6 +83,11 @@ Page({
   linkToProduct: function (e) {
     wx.redirectTo({
       url: '/pages/product/detail?id=' + e.currentTarget.dataset.id,
+    })
+  },
+  navigationToProductEdit: function (e) {
+    wx.navigateTo({
+      url: '/pages/product_new/new?pagetype=edit&id=' + e.currentTarget.dataset.id,
     })
   }
 })
