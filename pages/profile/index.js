@@ -1,4 +1,6 @@
 // pages/profile/index.js
+var app = getApp()
+
 Page({
 
   /**
@@ -66,6 +68,11 @@ Page({
   navigationToProductNew: function(){
     wx.navigateTo({
       url: '/pages/product_new/new'
+    })
+  },
+  navigationToTest: function(){
+    wx.navigateTo({
+      url: '/pages/welcome/index',
     })
   }
 })

@@ -1,4 +1,5 @@
 // pages/search/search.js
+var app = getApp()
 
 Page({
 
@@ -89,7 +90,7 @@ Page({
     } else {
       // 向服务器发起搜索
       wx.request({
-        url: 'http://localhost:3000/products.json?q[title_or_sub_title_cont]=' + "" + e.detail.value.searchKey,
+        url: app.globalData.domain + '/products.json?q[title_or_sub_title_cont]=' + "" + e.detail.value.searchKey,
         header: {
           "Content-Type": "application/x-www-form-urlencoded"
         },

@@ -64,6 +64,7 @@ App({
     sysInfo: null,
     windowW: null,
     windowH: null,
-    lock: true
+    lock: true,
+    domain: "http://huiyutongwechat.top"
   }
 })

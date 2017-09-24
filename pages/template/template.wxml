@@ -5,13 +5,30 @@
     <view class='product-list'>
     <block wx:for="{{products}}">
       <view bindtap='navigationTo' data-id="{{item.id}}" class='product-item'>
-        <view class='product-image'><image src='{{item.image}}'></image></view>
+        <image class='product-image' src='{{item.image}}'></image>
         <view class='product-detail'>
           <view class='product-title'>{{item.title}}</view>
           <view class='product-subtitle'>{{item.sub_title}}</view>
-          <view class='product-price'>{{item.price}}</view>
+          <view class='product-price'>{{item.price}} 元</view>
         </view>
       </view>
     </block>
   </view>
+</template>
+
+
+<!-- 产品列表模板（一行两件产品） -->
+<template name="product_list_2">
+      <view class='product-show-group'>
+      <block wx:for="{{random_product}}">
+        <view data-id="{{item.id}}" bindtap='linkToProduct' class='product-show-item'>
+          <image class='product-show-image' style='height: {{windowH * 0.47}}rpx ' src='{{item.image}}'></image>
+          <view class='random-product-detail'>
+            <view class='product-show-title'>{{item.title}}</view>
+            <view class='product-show-subtitle'>{{item.sub_title}}</view>
+            <view class='product-show-price'>{{item.price}} 元</view>
+          </view>
+        </view>
+      </block>
+    </view>
 </template>

@@ -1,3 +1,4 @@
 <!--pages/profile/index.wxml-->
 <text>pages/profile/index.wxml</text>
 <button bindtap='navigationToProductNew'>去新增商品</button>
+<button bindtap='navigationToTest'>测试</button>

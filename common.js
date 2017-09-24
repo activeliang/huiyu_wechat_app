@@ -1,12 +1,20 @@
+var app = getApp()
+
 // 图片上传功能
 function uploadImgAndVideo(id, imgPath, videoPath, i) {
-  console.log("看")
+  if (imgPath == undefined){
+    wx.hideLoading()
+    wx.showModal({
+      title: '提示',
+      content: '提交成功！'
+    })
+  } else {
   console.log(imgPath.length )
   console.log("I等于",i)
   console.log(i <= imgPath.length - 1 )
   if (i <= imgPath.length - 1 ){
     wx.uploadFile({
-      url: 'http://localhost:3000/products/' + id + '/update_product_image',
+      url: app.globalData.sysInfo.domain + '/products/' + id + '/update_product_image',
       method: "POST",
       header: { 'content-type': 'multipart/form-data' },
       filePath: imgPath[i],
@@ -35,14 +43,14 @@ function uploadImgAndVideo(id, imgPath, videoPath, i) {
   } else if ( videoPath != undefined ){
     uploadVideo(id, videoPath)
   }
-
+  }
 }
 
 
 // 视频上传功能
 function uploadVideo(id, videoPath) {
   wx.uploadFile({
-    url: 'http://localhost:3000/products/' + id + '/update_form_wechat',
+    url: app.globalData.sysInfo.domain + '/products/' + id + '/update_form_wechat',
     method: "POST",
     header: { 'content-type': 'multipart/form-data' },
     filePath: videoPath,

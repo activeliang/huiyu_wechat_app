@@ -1,11 +1,14 @@
 <!--pages/product/detail.wxml-->
-<button bindtap='navigationToProductEdit' data-id="{{currentProductId}}">编辑</button>
+
+<!-- 引入模板 -->
+<import src="/pages/template/template.wxml"/>
+
 <view class='container-fluid'> 
   <!-- 轮播图 -->
-  <swiper indicator-dots="true" autoplay circular interval="3000" duration="800" >
+  <swiper class='product-img-swiper' indicator-active-color="#fff" indicator-color="rgba(48,48,48,0.3)" style='height: {{windowH * 0.8}}px' indicator-dots="true" autoplay circular interval="3000" duration="800" >
     <block wx:for="{{product.images}}">
       <swiper-item>
-        <image class='product-slider-images' src='{{item}}'/>
+        <image class='product-slider-images' style='height: 100%; width: 100%;' src='{{item}}'/>
       </swiper-item>
     </block>
   </swiper>
@@ -13,36 +16,31 @@
   <view class='product-detail'>
     <view class='product-title'>{{product.title}}</view>
     <view class='product-subtitle'>{{product.sub_title}}</view>
-    <view class='product-price'>{{product.price}}</view>
+    <view class='product-price'>{{product.price}} 元</view>
   </view>
+  <view class='line-ui'></view>
   <!-- 产品视频展示 -->
   <view class='product-video'>
-    <video src='{{product.video}}' controls ></video>
+    <video poster="{{main_img}}" src='{{product.video}}' controls style="width: 100%; " ></video>
   </view>
   <!-- 产品详情 -->
   <view class='product-description'>{{product.description}}</view>
+  <view class='line-ui'></view>
   <view class='product-images-group'>
     <block wx:for="{{product.images}}">
-      <view> <image class='product-images-item' src='{{item}}'></image> </view>
+      <image class='product-images-item' style='width: 100%; height: {{windowH * 0.7}}px' src='{{item}}'></image>
     </block>
   </view>
+
+  <view class='line-ui'></view>
   <!-- 随机产品推荐 -->
   <view class='random-show'>
     <view class='random-show-slogan'>随机推荐</view>
-    <view class='product-show-group'>
-      <block wx:for="{{random_product}}">
-        <view data-id="{{item.id}}" bindtap='linkToProduct' class='product-show-item'>
-          <view> <image class='product-show-image' src='{{item.image}}'></image> </view>
-          <view class='product-show-title'>{{item.title}}</view>
-          <view class='product-show-subtitle'>{{item.sub_title}}</view>
-          <view class='product-show-price'>{{item.price}}</view>
-        </view>
-      </block>
-    </view>
+    <template is="product_list_2" data="{{random_product: random_product, windowH: windowH}}"></template>
   </view>
   <!-- 固定的页脚 -->
   <view class='footer'>
     <view class='add-collect'>收藏</view>
-    <view class='share-btn'>分享</view>
+    <button bindtap='share_btn' open-type="share" class='share-btn'>转发分享</button>
   </view>
 </view>

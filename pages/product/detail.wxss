@@ -1,1 +1,119 @@
 /* pages/product/detail.wxss */
+.product-img-swiper{
+width:100%;
+height:700rpx;
+
+}
+.product-slider-images image{
+  height: 700rpx;
+}
+.product-detail {
+  padding: 30rpx;
+
+}
+.product-title{
+font-size:30rpx;
+color:#333;
+
+}
+.product-subtitle{
+font-size:24rpx;
+color:#999;
+margin:8rpx 0 8rpx;
+
+}
+.product-price{
+color:#e67c3a;
+font-size:30rpx;
+
+}
+.line-ui{
+  width:100%;
+height:16rpx;
+background:#e8e8e8;
+
+}
+.product-video{
+
+}
+.product-description{
+margin:30rpx;
+font-size:28rpx;
+color:#555;
+
+}
+.product-images-item{
+  
+}
+
+.footer{
+bottom:0px;
+width:100%;
+z-index:3;
+text-align:center;
+color:#fff;
+position:fixed;
+background: #ec702e;
+
+}
+.add-collect{
+display:none;
+
+}
+.share-btn{
+padding:21rpx;
+background:transparent;
+border-radius:0;
+border:0;
+line-height:50rpx;
+color: #fff;
+
+}
+button::after{
+  border-radius: 0;
+}
+.random-show-slogan{
+  border-bottom:1rpx solid #d2d2d2;
+margin-bottom:7rpx;
+padding:10rpx 20rpx;
+font-size:30rpx;
+
+}
+
+/* 以下是模板2的模式 */
+.product-show-group{
+display: flex;
+flex-flow: row wrap;
+justify-content: space-between;
+}
+.product-show-item{
+overflow:hidden;
+flex-basis:49.5%;
+}
+.product-show-image{
+  height:190px;
+width: 100%;
+}
+.product-show-title{
+  font-size:32rpx;
+}
+.product-show-subtitle{
+  font-size:26rpx;
+color:#999;
+
+}
+.product-show-price{
+  color:#e67c3a;
+font-size:27rpx;
+
+}
+.random-product-detail{
+  padding:17rpx;
+  margin-top:-15rpx;
+
+
+}
+.random-show{
+  padding-bottom:100rpx;
+
+}

@@ -1,4 +1,6 @@
 // pages/product_list/list.js
+var app = getApp()
+
 Page({
 
   /**
@@ -22,7 +24,7 @@ Page({
     var that = this;
     var category_id = options.id, category_title = options.title;
     wx.request({
-      url: "http://localhost:3000/categories/" + category_id + ".json?title=" + category_title,
+      url: app.globalData.domain + "/categories/" + category_id + ".json?title=" + category_title,
       method: "GET",
       header: {
         'content-type': 'application/json' // 默认值
@@ -90,6 +92,11 @@ Page({
     console.log(e.currentTarget.dataset.id)
     wx.navigateTo({
       url: '/pages/product/detail?id=' + e.currentTarget.dataset.id,
+    })
+  },
+  goToEdit: function (e) {
+    wx.navigateTo({
+      url: '/pages/product_new/new?pagetype=edit&id=' + e.currentTarget.dataset.id,
     })
   }
   

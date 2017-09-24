@@ -1,5 +1,4 @@
 // pages/category/category.js
-import defaultData from '../../data';
 var app = getApp()
 Page({
 
@@ -35,7 +34,7 @@ Page({
     
     var that = this;
     wx.request({
-      url: 'http://localhost:3000/categories.json',
+      url: app.globalData.domain + '/categories.json',
       method: "GET",
       header: {
         'content-type': 'application/json' // 默认值
@@ -130,9 +129,11 @@ Page({
       var that = this;
       var scrollTop = e.detail.scrollTop;
       var i = 0;
+      var screenWidth = app.globalData.windowW;
       var scroll_detail = this.data.category_tree.scroll_detail;
       for (i in scroll_detail) {
-        if (scroll_detail[i] > scrollTop){ 
+        console.log("当前滚动高度：", scroll_detail[i] * (screenWidth / 375));
+        if (scroll_detail[i] * (screenWidth / 375) > scrollTop){ 
           that.setData({
             currentScrollItem: i,
             currentNavLeft: ""

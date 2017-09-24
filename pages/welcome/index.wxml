@@ -1,15 +1,6 @@
-<!--pages/welcome/index.wxml-->
-<!-- 首页 -->
-
-<view class='container-fluid'>
-  <!-- 搜索框 -->
-  <view class='search-item'>
-    <button class='search-btn'><icon class='search-icon' type='search' size='12'/>搜索商品</button>
-  </view>
-
-  <!-- 轮播图 -->
-
-
-
-  
+<!--index.wxml-->
+<view class="container">
+ <view bindtap="box" class="box" >
+ <view disable-scroll="true" wx:for="{{content}}" bindtouchmove="move" bindtouchstart="movestart" bindtouchend="moveend" data-index="{{item.id}}" data-main="{{mainx}}" class="main {{mainx == item.id? 'mainmove':'mainend'}}" style="left:{{start.x}}px; top:{{start.y}}px">{{item.content}}</view>
+ </view>
 </view>

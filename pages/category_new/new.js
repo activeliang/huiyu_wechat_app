@@ -1,4 +1,6 @@
 // pages/category_new/new.js
+var app = getApp()
+
 Page({
 
   /**
@@ -17,7 +19,7 @@ Page({
     // 获取一级分类列表
     var that = this;
     wx.request({
-      url: "http://localhost:3000/categories/for_wechat_category_new_picker",
+      url: app.globalData.domain + "/categories/for_wechat_category_new_picker",
       success: function(res) {
         console.log("加载成功")
         that.setData({
@@ -96,7 +98,7 @@ Page({
     var that = this;
     var value = e.detail.value;
     wx.request({
-      url: "http://localhost:3000/categories/create_form_api",
+      url: app.globalData.domain + "/categories/create_form_api",
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
       },

@@ -1,5 +1,7 @@
  // pages/product_new/new.js
 // 引入公共模板js
+var app = getApp()
+
 var common = require('../../common.js')
 
 Page({
@@ -34,7 +36,7 @@ Page({
     // 加载服务器根目录下分类数据
     var that = this;
     wx.request({
-      url: "http://localhost:3000/categories/for_wechat_product_new_picker",
+      url: app.globalData.domain + "/categories/for_wechat_product_new_picker",
       success: function(res){
         var i = 0,title_arr = [],id_arr = [],title_item_arr = [],id_item_arr = [];
         for (i in res.data.title_arr){
@@ -72,7 +74,7 @@ Page({
 
     // 新增分类时获取一级分类列表
       wx.request({
-        url: "http://localhost:3000/categories/for_wechat_category_new_picker",
+        url: app.globalData.domain + "/categories/for_wechat_category_new_picker",
         success: function (res) {
           console.log("加载成功")
           console.log(res)
@@ -85,6 +87,7 @@ Page({
     
   },
   
+  // 向服务器获取一个产品的详情
   renderProductDetail: function (id, pagetype){
     if (id != undefined && pagetype == "edit") {
       this.setData({
@@ -94,7 +97,7 @@ Page({
       console.log("当前页面类型为edit", id)
       var that = this;
       wx.request({
-        url: "http://localhost:3000/products/" + id + "/get_product_detail",
+        url: app.globalData.domain + "/products/" + id + "/get_product_detail",
         success: function (res) {
           console.log("查询到的product_detail", res)
           console.log("当前所有的页面变量：", that.data)
@@ -108,7 +111,18 @@ Page({
             currentIndex: editProductcurrentCategoryIndex,
             categoryTitleInput: res.data.category_title,
             pickerIndex: editProductcurrentCategoryIndex[0] + 1 ,
-            multiArray: multiArray
+            multiArray: multiArray,
+            previewImgUrl: res.data.image,
+            previewVideoUrl: res.data.video.url,
+            previewVideoDisplay: "block",
+            editProductWeight: res.data.weight,
+            formHelperInStock: res.data.in_stock,
+            formHelperIsHide: res.data.is_hide,
+            formHelperIndexShow: res.data.index_show,
+            productTitleInput: res.data.title,
+            productSubTitleInput: res.data.sub_title,
+            productDescriptionInput: res.data.description,
+            productPriceInput: res.data.price
           })
           console.log("设置PickerIndex", that.data.multiArray[1], that.data.multiIndex[1] )
           console.log("当前设置的title_input值", that.data.categoryTitleInput)
@@ -119,6 +133,7 @@ Page({
     }
   },
 
+  // 根据产品返回来分类ID分析当前页面显示对应分类需要的选择器Index
   renderCategoryIndex: function(id, array){
     console.log("成功调用callback函数")
     console.log("检测分类变量和id_arr：", id, array)
@@ -215,7 +230,7 @@ Page({
     console.log("当前id:", this.data.currentId, this.data.currentTitle)
     let that = this;
     wx.request({
-      url: "http://localhost:3000/categories/" + this.data.editCategoryId + "/get_category_detail",
+      url: app.globalData.domain + "/categories/" + this.data.editCategoryId + "/get_category_detail",
       success: function(res){
         console.log(res.data)
         if (res.data.image != null){
@@ -286,6 +301,7 @@ Page({
       success: function(res){
         console.log(res)
         that.setData({
+          videoTempFilePath: res.tempFilePath,
           previewVideoUrl: res.tempFilePath,
           videoSize: res.size,
           videoLength: res.duration,
@@ -372,13 +388,13 @@ Page({
     if (that.data.categoryType == "add") {
       console.log("新增分类")
       console.log(edit_id)
-       url = "http://localhost:3000/categories/create_form_api";
+       url = app.globalData.domain + "/categories/create_form_api";
        data = { title: value.title, parent_id: that.data.currentParentId, weight: that.data.formHelperCategoryWeight }
 
     } else if (that.data.categoryType == "edit") {
       console.log("编辑分类")
       console.log(edit_id)
-       url = "http://localhost:3000/categories/" + edit_id + "/update_form_api";
+       url = app.globalData.domain + "/categories/" + edit_id + "/update_form_api";
        data = { title: value.title, parent_id: parent_id, weight: that.data.formHelperCategoryWeight }
     }
     wx.request({
@@ -395,7 +411,7 @@ Page({
           console.log(that.data.selectedCategoryImgUrl);
           if (that.data.selectedCategoryImgUrl != ""){
             wx.uploadFile({
-              url: 'http://localhost:3000/categories/' + res.data.id + "/update_image_form_api",
+              url: app.globalData.domain + '/categories/' + res.data.id + "/update_image_form_api",
               filePath: that.data.selectedCategoryImgUrl,
               name: 'image',
               success: function(ress){
@@ -453,8 +469,13 @@ Page({
     var that = this;
     var value = e.detail.value;
     console.log("即将要上传的分类ID:", this.data.currentId)
+    if (this.data.pageType == "edit"){
+      var url = app.globalData.domain + '/products/' + this.data.editProductId + '/update_form_wechat'
+    } else {
+      var url = app.globalData.domain + '/products/create_form_wechat'
+    }
     wx.request({
-      url: 'http://localhost:3000/products/create_form_wechat',
+      url: url,
       method: "POST",
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
@@ -468,7 +489,7 @@ Page({
           console.log(that.data.tempFilePaths)
           // 进行图片和视频上传
           console.log(that.data.previewVideoUrl)
-          common.uploadImgAndVideo(id, that.data.tempFilePaths, that.data.previewVideoUrl, 0)
+          common.uploadImgAndVideo(id, that.data.tempFilePaths, that.data.videoTempFilePath, 0)
         } else {
           wx.showModal({
             title: '提示',

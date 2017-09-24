@@ -1,10 +1,13 @@
 // pages/product/detail.js
+var app = getApp()
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+
   },
 
   /**
@@ -14,9 +17,9 @@ Page({
     this.setData({currentProductId: options.id})
     // 加载时向服务器请求产品详情数据
     var that = this;
-    console.log("http://localhost:3000/products/" + options.id + ".json")
+    console.log(app.globalData.domain + "/products/" + options.id + ".json")
     wx.request({
-      url: "http://localhost:3000/products/" + options.id + ".json" ,
+      url: app.globalData.domain + "/products/" + options.id + ".json" ,
       method: "GET",
       header: {
         'content-type': 'application/json' // 默认值
@@ -24,11 +27,15 @@ Page({
       success: function (res) {
         that.setData({
           product: res.data.product,
-          random_product: res.data.random_product
+          random_product: res.data.random_product,
+          windowH: app.globalData.sysInfo.windowHeight,
+          main_img: res.data.product_main_img
         })
         console.log(res.data)
       }
     })
+    console.log("获取globalData", app.globalData.sysInfo.windowHeight)
+    console.log(windowH)
   },
 
   /**
@@ -76,8 +83,21 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-  
+  onShareAppMessage: function (res) {
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: "【汇宇通】" + this.data.product.title,
+      path: '/pages/product/detail?id=' + this.data.currentProductId,
+      success: function (res) {
+        // 转发成功
+      },
+      fail: function (res) {
+        // 转发失败
+      }
+    }
   },
   // 随机推荐的产品列表，点击跳转到详情页面
   linkToProduct: function (e) {
@@ -88,6 +108,11 @@ Page({
   navigationToProductEdit: function (e) {
     wx.navigateTo({
       url: '/pages/product_new/new?pagetype=edit&id=' + e.currentTarget.dataset.id,
+    })
+  },
+  share_btn: function () {
+    wx.showShareMenu({
+      withShareTicket: true
     })
   }
 })

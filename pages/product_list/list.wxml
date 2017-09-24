@@ -5,7 +5,24 @@
 
 <!-- 分类下产品列表 -->
 <view class="container-fluid list-page">
-  <view class='line'></view>
-  <view class='category-title'>{{title}}</view>
-  <template is="product_list" data="{{products: product_list}}"/>
+  <view class='title-slogan'>
+  <view class='category-title'><view class='line'></view>{{title}}<view class='line'></view></view>
+  </view>
+  <!-- 模板 产品列 -->
+  <view name="product_list">
+    <view class='product-list'>
+    <block wx:for="{{product_list}}">
+      <view bindtap='navigationTo' data-id="{{item.id}}" class='product-item'>
+        <image class='product-image' src='{{item.image}}'></image>
+        <view class='product-detail'>
+          <view class='product-title'>{{item.title}}</view>
+          <view class='product-subtitle'>{{item.sub_title}}</view>
+          <view class='product-price'>{{item.price}} 元</view>
+          <view catchtap="goToEdit" data-id="{{item.id}}" class='edit-btn'>编辑</view>
+          <view class='edit-btn  delete-btn'>删除</view>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>
 </view>

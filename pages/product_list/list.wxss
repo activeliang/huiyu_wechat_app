@@ -1,1 +1,82 @@
 /* pages/product_list/list.wxss */
+.title-slogan{
+  text-align: center;
+  margin:35rpx;
+
+}
+.line{
+height:1rpx;
+background:#e3e3e3;
+display:inline-block;
+position:relative;
+top:-12rpx;
+width:37rpx;
+margin:0 16rpx;
+
+}
+.category-title{
+  display: inline;
+  text-align: center;
+}
+.edit-btn{
+  float:right;
+position:absolute;
+right:30rpx;
+bottom:8rpx;
+background:#f4f4f4;
+padding:5rpx 15rpx;
+border:1rpx solid #999;
+border-radius:11rpx;
+font-size:22rpx;
+color:#777;
+
+
+}
+.delete-btn{
+  right:130rpx;
+}
+
+/* 以下是模板的模式 */
+.product-item{
+  background:#fff;
+padding:30rpx 0;
+border-bottom:1rpx solid #f1f1f1;
+margin:0 28rpx;
+position:relative;
+
+
+}
+.product-image{
+  max-width: 24%;
+  max-height: 150rpx;
+  float: left;
+  margin-right:27rpx;
+
+}
+.product-detail{
+  font-size:30rpx;
+min-height:150rpx;
+
+}
+.product-title{
+font-size:28rpx;
+color:#222;
+position:relative;
+top:-10rpx;
+
+
+
+}
+.product-subtitle{
+font-size:23rpx;
+color:#999;
+top:-2rpx;
+max-height:64rpx;
+}
+.product-price{
+font-size:24rpx;
+color:#E67C3A;
+position:relative;
+top:13rpx;
+
+}

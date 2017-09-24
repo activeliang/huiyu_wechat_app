@@ -12,14 +12,13 @@
     <block wx:for="{{category_tree.tree}}" wx:for-item="root">
 
       <view id='nav_right-{{root.id}}' class="root-item">
-        <view class="line"></view>
-        <view class="root-title-right">{{root.title}}</view>
+        <view class="root-title-right"><view class="line"></view>{{root.title}}<view class="line"></view></view>
 
         <view class="category-group">
           <!-- 按当前分类的下一级分类来渲染 -->
           <block wx:for="{{root.children}}" wx:for-item="children">
             <view bindtap='navigationTo' data-id="{{children.id}}" data-title="{{children.title}}" class="category-item">
-              <view class="category-item-image"><image src='{{children.image}}'></image></view>
+              <image class="category-item-image" src='{{children.image}}'></image>
               <view class="category-title">{{children.title}}</view>
             </view>
           </block>

@@ -71,13 +71,13 @@
 <!-- 输入表单 -->
 <form bindsubmit="formSubmit">
   <view class='label-item'>产品名</view>
-  <input class='input-item' name="title" type='text' confirm-type="next"></input>
+  <input class='input-item' name="title" type='text' value='{{productTitleInput}}' confirm-type="next"></input>
   <view class='label-item'>副标题</view>
-  <input class='input-item' name="sub_title" type='text' confirm-type="next"></input>
+  <input class='input-item' name="sub_title" type='text' value='{{productSubTitleInput}}' confirm-type="next"></input>
   <view class='label-item'>详情</view>
-  <textarea class='input-item' name="description" type='text' confirm-type="next"></textarea>
+  <textarea class='input-item' name="description" type='text' value='{{productDescriptionInput}}' confirm-type="next"></textarea>
   <view class='label-item'>价格</view>
-  <input class='input-item' name="price" type='digit' confirm-type="next"></input>
+  <input class='input-item' name="price" type='digit' value='{{productPriceInput}}' confirm-type="next"></input>
   <view class="switch-item" wx:if="{{formHelperInStock}}">有现货？<switch checked bindchange="change_in_stock"/></view>
   <view class="switch-item" wx:else>有现货？<switch bindchange="change_in_stock"/></view>
   <view class="switch-item" wx:if="{{formHelperIsHide}}">暂时不上架<switch checked bindchange="change_is_hide"/></view>

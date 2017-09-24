@@ -1,5 +1,6 @@
 //index.js
 //获取应用实例
+
 const app = getApp()
 
 Page({
@@ -85,6 +86,7 @@ Page({
     })
   },
   onLoad: function () {
+    console.log("测试当前的后台网址", app.globalData.domain)
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
