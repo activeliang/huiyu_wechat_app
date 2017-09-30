@@ -1,133 +1,169 @@
-//index.js
-//获取应用实例
-
-const app = getApp()
-
+// pages/index/index.js
 Page({
+
+  /**
+   * 页面的初始数据
+   */
   data: {
-    motto: 'Hello World',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    videoUrl: "http://ow9r8dc0w.bkt.clouddn.com/uploads/product/video/2/Apple_Official_iPhone_8_Trailer_2017.mp4",
+    imgUrl: ["http://olmrxx9ks.bkt.clouddn.com/2017-09-22-timg.jpeg", "http://olmrxx9ks.bkt.clouddn.com/2017-09-22-timg.jpeg", "http://olmrxx9ks.bkt.clouddn.com/2017-09-22-timg.jpeg", "http://olmrxx9ks.bkt.clouddn.com/2017-09-22-timg.jpeg", "http://olmrxx9ks.bkt.clouddn.com/2017-09-22-timg.jpeg"],
+    imgGroupUrl: ""
   },
 
-  data: {
-    array: ['美国', '中国', '巴西', '日本'],
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
 
-    index: 0,
-    multiArray: [['无脊柱动物', '脊柱动物'], ['扁性动物', '线形动物', '环节动物', '软体动物', '节肢动物']],
-    multiIndex: [0, 0, 0],
-    date: '2016-09-01',
-    time: '12:01',
-    region: ['广东省', '广州市', '海珠区'],
-    customItem: '全部'
-  },
-  bindPickerChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      index: e.detail.value
+    // 获取打开小程序时所在的位置
+    var that = this;
+    wx.getLocation({
+      type: 'gcj02',
+      success: function (res) {
+        console.log("标记点3", res)
+        that.setData({
+          lat: res.latitude,
+          lng: res.longitude
+        })
+        var origin = res.longitude + ',' + res.latitude
+        // var origin = "108.949333,34.266597"
+        console.log("标记点6", origin)
+        that.get_distance(origin)
+      }
     })
-  },
-  bindMultiPickerChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      multiIndex: e.detail.value
-    })
-  },
-  bindMultiPickerColumnChange: function (e) {
-    console.log('修改的列为', e.detail.column, '，值为', e.detail.value);
-    var data = {
-      multiArray: this.data.multiArray,
-      multiIndex: this.data.multiIndex
-    };
-    data.multiIndex[e.detail.column] = e.detail.value;
-    switch (e.detail.column) {
-      case 0:
-        switch (data.multiIndex[0]) {
-          case 0:
-            data.multiArray[1] = ['扁性动物', '线形动物', '环节动物', '软体动物', '节肢动物'];
-            break;
-          case 1:
-            data.multiArray[1] = ['鱼', '两栖动物', '爬行动物'];
-            break;
-        }
-        data.multiIndex[1] = 0;
-        data.multiIndex[2] = 0;
-        break;
 
+
+    
+
+    console.log("两点距离" + that.getDistance(34.268188,108.944725,34.264892,108.950476))
+    
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+  
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+  
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+  
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+  
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+  
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+  
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function (res) {
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
     }
-    this.setData(data);
+    return {
+      title: 汇宇通小程序,
+      path: '/pages/index/index',
+      success: function (res) {
+        wx.showToast({
+          title: '转发成功'
+        })
+      },
+      fail: function (res) {
+        // 转发失败
+      }
+    }
   },
-  bindDateChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      date: e.detail.value
+  // 拔打电话
+  make_call: function(){
+    wx.makePhoneCall({
+      phoneNumber: '13726470930' 
     })
   },
-  bindTimeChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      time: e.detail.value
+  // 打开地图
+  show_map: function(){
+    wx.openLocation({
+      latitude: 34.264892,
+      longitude: 108.950476,
+      scale: 15,
+      name: "汇宇通通讯",
+      address: "西安市新城区西新街海星智能广场负一层西厅A6"
     })
   },
-  bindRegionChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      region: e.detail.value
-    })
-  },
+  // 查询两点行驶距离（步行或驾车）
+  get_distance: function (origin) {
+    var that = this;
+    console.log("标记点2", origin)
+    console.log("标记点7", that.getDistance(that.data.lat, that.data.lng, 34.266597, 108.949333))
+    if (that.getDistance(that.data.lat, that.data.lng, 34.266597, 108.949333) > 5000){
+      var url = 'https://restapi.amap.com/v3/direction/driving?'
+    } else {
+      var url = 'https://restapi.amap.com/v3/direction/walking?'
+    }
+    wx.request({
+      url: url,
+      data: { key: "f30da713208bfd50ec9d0943e21482bd", destination: "108.950476,34.264892", origin: origin },
+      success: function (res) {
+        console.log("标记点1", res);
+        console.log("标记点4", res.data.route.paths[0].distance + 'm');
 
-
-
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
-  onLoad: function () {
-    console.log("测试当前的后台网址", app.globalData.domain)
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
+        if (res.data.route.paths[0].distance < 1000){
+          var distance = res.data.route.paths[0].distance + 'm'
+        } else {
+          var distance = (res.data.route.paths[0].distance / 1000).toFixed(2) + 'km'
+        }
+        that.setData({
+          distance: distance
         })
       }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    }
-  },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
     })
   },
-  gotosearch: function (e) {
-    wx.navigateTo({
-      url: '/pages/search/search',
-    })
+  // 计算两个点的直线距离
+  getDistance: function (lat1, lng1, lat2, lng2) {
+    lat1 = lat1 || 0;
+    lng1 = lng1 || 0;
+    lat2 = lat2 || 0;
+    lng2 = lng2 || 0;
+    var rad1 = lat1 * Math.PI / 180.0;
+    var rad2 = lat2 * Math.PI / 180.0;
+    var a = rad1 - rad2;
+    var b = lng1 * Math.PI / 180.0 - lng2 * Math.PI / 180.0;
+    var r = 6378137;
+    return r * 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(rad1) * Math.cos(rad2) * Math.pow(Math.sin(b / 2), 2)))
   },
-  handleTap1: function (e) {
-    console.log(e)
+  // 打开图片
+  imgpreview: function(){
+    wx.previewImage({
+      current: this.data.imgUrl[0], // 当前显示图片的http链接
+      urls: this.data.imgUrl // 需要预览的图片http链接列表
+    })
   }
 })

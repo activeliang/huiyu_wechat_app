@@ -11,7 +11,8 @@ Page({
     current: "",
     scrollHeight: "",
     currentScrollItem: null,
-    lock: false
+    lock: false,
+    alreadyCompute: false
   },
 
   /**
@@ -29,7 +30,7 @@ Page({
     //   category_tree: defaultData.category_tree
     // })
 
-    // console.log("wftc", defaultData.category_tree.scroll_detail)
+    // console.log("wftc", defaultData.category_tree.scroll_detail_2)
 
     
     var that = this;
@@ -125,15 +126,29 @@ Page({
 
   // 右侧栏滚动事件
   scroll: function (e) {
+    var that = this;
+    if (this.data.alreadyCompute === false) {
+      var scroll_detail = this.data.category_tree.scroll_detail;
+      var itemHeight = e.detail.scrollHeight / (this.data.category_tree.sum.title * 0.6983 + this.data.category_tree.sum.item)
+      var titleHeight = itemHeight * 0.6983
+      var j = 0 , tem_a = [], x = 0;
+      for (j in scroll_detail){
+        x += scroll_detail[j] * itemHeight + titleHeight
+        tem_a.push(x)
+      }
+      that.setData({
+        scroll_detail_2: tem_a,
+        alreadyCompute: true
+      })
+    }
+      
     if (this.data.lock == false && e.detail.scrollHeight - app.globalData.windowH - e.detail.scrollTop > 50) {
-      var that = this;
       var scrollTop = e.detail.scrollTop;
       var i = 0;
       var screenWidth = app.globalData.windowW;
-      var scroll_detail = this.data.category_tree.scroll_detail;
-      for (i in scroll_detail) {
-        console.log("当前滚动高度：", scroll_detail[i] * (screenWidth / 375));
-        if (scroll_detail[i] * (screenWidth / 375) > scrollTop){ 
+      var scroll_detail_2 = this.data.scroll_detail_2
+      for (i in scroll_detail_2) {
+        if (scroll_detail_2[i] > scrollTop){ 
           that.setData({
             currentScrollItem: i,
             currentNavLeft: ""
@@ -142,23 +157,17 @@ Page({
           } 
         i++;
       }
-      console.log(this.data.currentScrollItem)
-      console.log(e.detail)
     } else if (e.detail.scrollHeight - app.globalData.windowH - e.detail.scrollTop < 50) {
       // 当距底部不足50px时触发事件
-      console.log("开始");
       var tree = this.data.category_tree.tree
       this.setData({
         currentNavLeft: tree[tree.length - 1].id,
         currentScrollItem: "99999",
         lock: true
       })
-      console.log("这是当前" + tree[tree.length - 1].id, this.data.lock)
     } else {
       this.data.lock = false
     }
-    console.log(e.detail.scrollHeight - app.globalData.windowH - e.detail.scrollTop)
-
   },
 
   // 点击左边侧栏点击事件

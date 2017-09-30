@@ -1,6 +1,6 @@
-// pages/profile/index.js
-var app = getApp()
-
+// pages/map/map.js
+var QQMapWX = require('../../libs/qqmap-wx-jssdk.js');
+var qqmapsdk;
 Page({
 
   /**
@@ -14,8 +14,26 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    // 实例化API核心类
+    qqmapsdk = new QQMapWX({
+      key: 'SU7BZ-356WU-QFXVK-4JQ7X-ZMVUV-KXFSL'
+    });
+
+    // 获取打开小程序时所在的位置
+    var that = this;
+    wx.getLocation({
+      type: 'wgs84',
+      success: function (res) {
+        console.log(res)
+        that.setData({
+          lat: res.latitude,
+          lng: res.longitude
+        })
+      }
+    })
+    console.log(this.data.lng)
   },
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -28,8 +46,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
-  },
+
+},
 
   /**
    * 生命周期函数--监听页面隐藏
@@ -64,20 +82,5 @@ Page({
    */
   onShareAppMessage: function () {
   
-  },
-  navigationToProductNew: function(){
-    wx.navigateTo({
-      url: '/pages/product_new/new'
-    })
-  },
-  navigationToTest: function(){
-    wx.navigateTo({
-      url: '/pages/welcome/index',
-    })
-  },
-  go_to_map: function () {
-    wx.navigateTo({
-      url: '/pages/map/map',
-    })
   }
 })

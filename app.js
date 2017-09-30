@@ -65,6 +65,8 @@ App({
     windowW: null,
     windowH: null,
     lock: true,
+                // app.globalData.domain
+    // domain: "http://localhost:3000"
     domain: "http://huiyutongwechat.top"
   }
 })

@@ -43,7 +43,7 @@ padding:30rpx 0;
 border-bottom:1rpx solid #f1f1f1;
 margin:0 28rpx;
 position:relative;
-
+display:flex;
 
 }
 .product-image{
@@ -59,7 +59,7 @@ min-height:150rpx;
 
 }
 .product-title{
-font-size:28rpx;
+font-size:32rpx;
 color:#222;
 position:relative;
 top:-10rpx;
@@ -68,13 +68,13 @@ top:-10rpx;
 
 }
 .product-subtitle{
-font-size:23rpx;
+font-size:26rpx;
 color:#999;
 top:-2rpx;
-max-height:64rpx;
+/* max-height:64rpx; */
 }
 .product-price{
-font-size:24rpx;
+font-size:28rpx;
 color:#E67C3A;
 position:relative;
 top:13rpx;

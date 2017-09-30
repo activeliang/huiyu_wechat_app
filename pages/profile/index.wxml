@@ -2,3 +2,4 @@
 <text>pages/profile/index.wxml</text>
 <button bindtap='navigationToProductNew'>去新增商品</button>
 <button bindtap='navigationToTest'>测试</button>
+<button bindtap='go_to_map'>去看看地图</button>

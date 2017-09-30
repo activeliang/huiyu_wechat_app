@@ -34,7 +34,7 @@ background:#e8e8e8;
 
 }
 .product-video{
-
+ z-index: 0;
 }
 .product-description{
 margin:30rpx;
@@ -67,6 +67,7 @@ border-radius:0;
 border:0;
 line-height:50rpx;
 color: #fff;
+z-index: 7;
 
 }
 button::after{

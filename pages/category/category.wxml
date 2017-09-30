@@ -25,7 +25,7 @@
           <!-- 按当前分类下的产品来渲染 -->
           <block wx:for="{{root.products}}">
             <view bindtap='navigationToProduct' data-id="{{item.id}}" class="category-item">
-              <view class="category-item-image"><image src='{{item.image}}'></image></view>
+              <image class="category-item-image" src='{{item.image}}'></image>
               <view class="category-title">{{item.title}}</view>
             </view>
           </block>
