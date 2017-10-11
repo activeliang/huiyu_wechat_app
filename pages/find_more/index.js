@@ -1,6 +1,6 @@
 //index.js
 //获取应用实例
-
+const common = require('../../common.js')
 const app = getApp()
 
 Page({
@@ -43,14 +43,15 @@ Page({
 
   // 获取首页展示数据
     var that = this;
-    wx.request({
+    common.simpleRequest({
       url: app.globalData.domain + "/homeset.json",
       success: function (res) {
         that.setData({
+          categoryShow: res.data.index_category,
            homeData: res.data,
            windowW: app.globalData.windowW,
-           sliderItem: res.data.products.slice(0, 4),
-           productItem: res.data.products.slice(3, 50)
+           sliderGroup: res.data.products.slice(0, 4),
+           productItem: res.data.products.slice(5, 50)
         })
         console.log("获取到的首页数据：", that.data.homeData)
         console.log(res.data.products.slice(0, 3))
@@ -74,17 +75,16 @@ Page({
       url: '/pages/search/search',
     })
   },
-  handleTap1: function (e) {
-    console.log(e)
-  },
-  sliderCurrentItem: function (e) {
-    console.log(e)
-  },
   slider_navigation: function (e) {
     console.log(e)
     wx.navigateTo({
       url: "/pages/product/detail?id=" + e.currentTarget.dataset.id,
     })
+  },
+  navigaToCategory: function (e){
+     wx.navigateTo({
+       url: '/pages/product_list/list?id=' + e.currentTarget.dataset.id + "&title=" + e.currentTarget.dataset.title,
+     })
   }
 })
 

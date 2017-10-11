@@ -1,0 +1,96 @@
+/* pages/login_log/index.wxss */
+.page-bc{
+  background:#f8f8f8;
+padding-top:20rpx;
+
+}
+.user-detail{
+display:flex;
+flex-flow:row nowrap;
+padding:20rpx 30rpx;
+background:#fff;
+border-top:1rpx solid #f1f1f1;
+border-bottom:1rpx solid #f1f1f1;
+
+
+
+}
+.user-avatar{
+width:170rpx;
+height:170rpx;
+border-radius:5px;
+flex-shrink:0;
+
+
+
+}
+.user-nickname-localtion{
+margin-left:30rpx;
+flex-shrink:1;
+
+
+
+}
+.user-nickname-gender{
+  display:flex;
+flex-flow:row nowrap;
+
+}
+.user-gender-icon{
+height:24rpx;
+margin-top:16rpx;
+margin-left:12rpx;
+width:24rpx;
+
+
+}
+.user-nickname{
+font-size:34rpx;
+margin-top:10rpx;
+color:#333;
+
+
+}
+.user-localtion{
+font-size:30rpx;
+margin-top:30rpx;
+color:#999;
+/* font-weight:200; */
+
+
+}
+.alert-info{
+  font-size:23rpx;
+color:#c8c8c8;
+/* font-weight:100;/ */
+text-align:center;
+padding:10rpx;
+
+}
+.logs-group{}
+.logs-item{
+padding:18rpx 30rpx;
+background:#fff;
+border-top:1rpx solid #f1f1f1;
+border-bottom:1rpx solid #f1f1f1;
+margin-bottom:10rpx;
+display:flex;
+flex-flow:row nowrap;
+color:#555;
+font-size:32rpx;
+
+
+}
+.logs-date{
+  margin-right:20rpx;
+
+}
+.logs-time-type{
+  margin-right:5rpx;
+
+}
+.logs-time{
+  margin-right:20rpx;
+
+}
+.logs-weekend{}

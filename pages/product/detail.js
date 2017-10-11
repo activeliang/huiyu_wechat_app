@@ -1,6 +1,6 @@
 // pages/product/detail.js
-var app = getApp()
-
+const common = require('../../common.js')
+const app = getApp()
 Page({
 
   /**
@@ -14,11 +14,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log("传参: ", options.id)
     this.setData({currentProductId: options.id})
     // 加载时向服务器请求产品详情数据
     var that = this;
     console.log(app.globalData.domain + "/products/" + options.id + ".json")
-    wx.request({
+    common.simpleRequest({
       url: app.globalData.domain + "/products/" + options.id + ".json" ,
       method: "GET",
       header: {
@@ -29,6 +30,7 @@ Page({
           product: res.data.product,
           random_product: res.data.random_product,
           windowH: app.globalData.sysInfo.windowHeight,
+          windowW: app.globalData.sysInfo.windowWidth,
           main_img: res.data.product_main_img
         })
         console.log(res.data)
@@ -113,6 +115,40 @@ Page({
   share_btn: function () {
     wx.showShareMenu({
       withShareTicket: true
+    })
+  },
+  // 预览图片
+  previewImg: function(res){
+    var that = this;
+    console.log("标记点1", res)
+    wx.previewImage({
+      current: that.data.product.images[res.currentTarget.dataset.index], // 当前显示图片的http链接
+      urls: that.data.product.images // 需要预览的图片http链接列表
+    })
+  },
+  // 加入收藏
+  add_collect: function(){
+    var that = this;
+    common.simpleRequest({
+      url: app.globalData.domain + "/collects/create_collect",
+      method: "POST",
+      data: { product_id: that.data.currentProductId, product_img: that.data.main_img, product_name: that.data.product.title },
+      success: function(res){
+        console.log("加入收藏返回的数据：", res)
+        if (res.data.status == "ok"){
+          wx.showToast({
+            title: res.data.info,
+            icon: 'success'
+          })
+        } else {
+          wx.showModal({
+            title: '提示',
+            content: res.data.info,
+            showCancel: false
+          })
+        }
+
+      }
     })
   }
 })

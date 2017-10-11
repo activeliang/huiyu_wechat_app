@@ -12,19 +12,19 @@ height:700rpx;
 
 }
 .product-title{
-font-size:30rpx;
+font-size:34rpx;
 color:#333;
 
 }
 .product-subtitle{
-font-size:24rpx;
+font-size:28rpx;
 color:#999;
 margin:8rpx 0 8rpx;
 
 }
 .product-price{
 color:#e67c3a;
-font-size:30rpx;
+font-size:32rpx;
 
 }
 .line-ui{
@@ -35,10 +35,12 @@ background:#e8e8e8;
 }
 .product-video{
  z-index: 0;
+height:225px;
+
 }
 .product-description{
 margin:30rpx;
-font-size:28rpx;
+font-size:30rpx;
 color:#555;
 
 }
@@ -49,15 +51,25 @@ color:#555;
 .footer{
 bottom:0px;
 width:100%;
-z-index:3;
+z-index:99;
 text-align:center;
 color:#fff;
 position:fixed;
-background: #ec702e;
+background:#ec702e;
+display:flex;
+flex-flow:row nowrap;
+
 
 }
 .add-collect{
-display:none;
+
+flex-flow:row nowrap;
+line-height:50rpx;
+padding:21rpx;
+background:#ECA12E;
+font-size:18px;
+flex-grow:1;
+
 
 }
 .share-btn{
@@ -66,12 +78,17 @@ background:transparent;
 border-radius:0;
 border:0;
 line-height:50rpx;
-color: #fff;
-z-index: 7;
+color:#fff;
+z-index:7;
+flex-grow:1;
 
 }
+
+
+
 button::after{
   border-radius: 0;
+  border: 0;
 }
 .random-show-slogan{
   border-bottom:1rpx solid #d2d2d2;
@@ -97,15 +114,19 @@ width: 100%;
 }
 .product-show-title{
   font-size:32rpx;
+  padding-top:8rpx
 }
 .product-show-subtitle{
   font-size:26rpx;
 color:#999;
+padding:10rpx 0;
 
 }
 .product-show-price{
   color:#e67c3a;
 font-size:27rpx;
+padding-bottom:8rpx;
+
 
 }
 .random-product-detail{
@@ -117,4 +138,7 @@ font-size:27rpx;
 .random-show{
   padding-bottom:100rpx;
 
+}
+video{
+  z-index: -1;
 }

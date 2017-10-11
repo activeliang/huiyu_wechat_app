@@ -1,20 +1,21 @@
 // pages/index/index.js
+const common = require('../../common.js')
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    videoUrl: "http://ow9r8dc0w.bkt.clouddn.com/uploads/product/video/2/Apple_Official_iPhone_8_Trailer_2017.mp4",
-    imgUrl: ["http://olmrxx9ks.bkt.clouddn.com/2017-09-22-timg.jpeg", "http://olmrxx9ks.bkt.clouddn.com/2017-09-22-timg.jpeg", "http://olmrxx9ks.bkt.clouddn.com/2017-09-22-timg.jpeg", "http://olmrxx9ks.bkt.clouddn.com/2017-09-22-timg.jpeg", "http://olmrxx9ks.bkt.clouddn.com/2017-09-22-timg.jpeg"],
-    imgGroupUrl: ""
+    imgGroupUrl: "",
+    windowW: app.globalData.windowW
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    
     // 获取打开小程序时所在的位置
     var that = this;
     wx.getLocation({
@@ -32,8 +33,15 @@ Page({
       }
     })
 
-
-    
+    common.simpleRequest({
+      url: app.globalData.domain + "/homeset/get_wechat_homeset",
+      success: function (res) {
+        that.setData({
+          homesetData: res.data.homeset,
+          shopImages: res.data.shop_images
+        })
+      }
+    })    
 
     console.log("两点距离" + that.getDistance(34.268188,108.944725,34.264892,108.950476))
     
@@ -105,7 +113,7 @@ Page({
   // 拔打电话
   make_call: function(){
     wx.makePhoneCall({
-      phoneNumber: '13726470930' 
+      phoneNumber: this.data.homesetData.phone_no 
     })
   },
   // 打开地图
@@ -160,10 +168,10 @@ Page({
     return r * 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(rad1) * Math.cos(rad2) * Math.pow(Math.sin(b / 2), 2)))
   },
   // 打开图片
-  imgpreview: function(){
+  imgpreview: function(e){
     wx.previewImage({
-      current: this.data.imgUrl[0], // 当前显示图片的http链接
-      urls: this.data.imgUrl // 需要预览的图片http链接列表
+      current: this.data.shopImages[e.currentTarget.dataset.index], // 当前显示图片的http链接
+      urls: this.data.shopImages // 需要预览的图片http链接列表
     })
   }
 })

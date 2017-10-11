@@ -7,10 +7,10 @@
     <button bindtap='gotosearch' class='search-btn'><icon class='search-icon' type='search' size='12'/>搜索商品</button>
   </view>
   <!-- 轮播图 -->
-  <swiper class='slider-swiper' bindchange="sliderCurrentItem" indicator-active-color="#fff" indicator-color="rgba(48,48,48,0.3)" style='height: {{windowW * 0.625}}px' indicator-dots="true" autoplay circular interval="3000" duration="800" >
-    <block wx:for="{{sliderItem}}">
+  <swiper class='slider-swiper' indicator-active-color="#fff" indicator-color="rgba(48,48,48,0.3)" style='height: {{windowW * 0.625}}px' indicator-dots="true" autoplay circular interval="3000" duration="800" >
+    <block wx:for="{{sliderGroup}}">
     <swiper-item bindtap="slider_navigation" data-id="{{item.id}}" >
-      <image src='{{item.image}}' style='height: {{windowW * 0.625}}px' class='slider-image-item' />
+      <image src='{{item.small_image}}' style='height: {{windowW * 0.625}}px' class='slider-image-item' />
       <view class='product-screen-bc'>
         <view class='product-screen'>
         <view class='screen-title'>{{item.title}}</view>
@@ -23,16 +23,16 @@
   </swiper>
   <!-- 首页推广的产品分类 -->
   <view class='category-group'>
-    <block wx:for="{{sliderItem}}">
-      <view class='category-item'>
+    <block wx:for="{{categoryShow}}">
+      <view bindtap='navigaToCategory' data-title="{{item.title}}" data-id='{{item.id}}' class='category-item'>
         <image src='{{item.image}}' class='category-item-image' />
         <view class='category-item-title'>{{item.title}}</view>
       </view>
     </block>
     <!-- 新品分类 -->
-    <view class='category-item'>
-      <image src='{{homeData.new_product.image}}' class='category-item-image' />
-      <view class='category-item-title'>{{homeData.new_product.title}}</view>
+    <view bindtap='navigaToCategory' data-title="新品" data-id="新品" class='category-item'>
+      <image src='../../img/new_product.png' class='category-item-image' />
+      <view class='category-item-title'>新品</view>
     </view>
   </view>
   <!-- 灰色隔离带 -->
@@ -40,9 +40,9 @@
 
   <!-- 产品列 -->
   <view class='product-group'>
-    <block wx:for="{{homeData.products}}">
-      <view class='product-item'>
-        <image class='product-image' src='{{item.image}}'></image>
+    <block wx:for="{{productItem}}">
+      <view class='product-item' bindtap="slider_navigation" data-id="{{item.id}}">
+        <image class='product-image' style='height: {{windowW * 0.392}}' src='{{item.thumb_image}}'></image>
         <view class='product-title'>{{item.title}}</view>
         <view class='product-subtitle'>{{item.sub_title}}</view>
         <view class='product-price'>￥ {{item.price}}</view>

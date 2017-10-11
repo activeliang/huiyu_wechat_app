@@ -1,5 +1,6 @@
 // pages/category_new/new.js
-var app = getApp()
+const common = require('../../common.js')
+const app = getApp()
 
 Page({
 

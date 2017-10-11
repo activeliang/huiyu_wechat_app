@@ -1,5 +1,33 @@
+
 <!--pages/profile/index.wxml-->
-<text>pages/profile/index.wxml</text>
-<button bindtap='navigationToProductNew'>去新增商品</button>
-<button bindtap='navigationToTest'>测试</button>
-<button bindtap='go_to_map'>去看看地图</button>
+<!-- 背影图片 -->
+<image class='background-img' style='height: {{windowH * 0.4}}px' src='../../img/backgroundstar.png'></image>
+
+<view style='height: {{windowH * 0.4}}px' class='my-detail'>
+  <image class='wechat-user-avatar' src='{{userInfo.avatarUrl}}'></image>
+  <view class='nickname'>{{userInfo.nickName}}</view>
+  <view class='admin-alert'>
+    <span wx:if='{{ userType == "admin" }}' class="admin-info">
+      （<i class="fa fa-lightbulb-o" aria-hidden="true"></i>
+      管理员）
+    </span>
+    <span wx:else class="admin-info">—— 汇宇通小程序 ——</span>
+    <i bindtap="backend_witch" class="fa fa-tasks hide-btn" aria-hidden="true"></i>
+  </view>
+</view>
+
+<view class='container-profile' style='height: {{windowH * 0.6}}px'>
+
+<view class='backend-btn {{ btn_status == "hide" ? "backend-btn-hide" : "" }}' bindtap='go_to_admin_required'>
+  <i class="fa fa-cog" aria-hidden="true"></i>
+  商家管理后台
+  <i class="fa fa-chevron-right" aria-hidden="true"></i>
+</view>
+
+<view class='collect-btn' bindtap='go_to_my_collects'>
+  <i class="fa fa-cube" aria-hidden="true"></i>
+  我的收藏
+  <i class="fa fa-chevron-right" aria-hidden="true"></i>
+</view>
+
+</view>

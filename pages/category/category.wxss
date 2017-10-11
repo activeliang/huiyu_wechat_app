@@ -5,7 +5,7 @@
  overflow: hidden;
  float: left;
  text-align:center;
- border-right: 2rpx solid #f4f4f4;
+ border-right: 1rpx solid #d4d4d4;
  margin-right: -1rpx;
 }
 .root-title-left{
@@ -37,7 +37,7 @@ flex-flow:row wrap;
 
 }
 .category-item{
-width:30.5%;
+width:30.4%;
 padding:9rpx;
 
 }

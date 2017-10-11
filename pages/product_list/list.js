@@ -1,13 +1,12 @@
 // pages/product_list/list.js
-var app = getApp()
-
+const common = require('../../common.js')
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
   },
 
   /**
@@ -17,14 +16,15 @@ Page({
     // 跳转时，从上一个页面带来的参数
     this.setData({
       title: options.title,
-      id: options.id
+      id: options.id,
+      userType: app.globalData.userType
     })
 
     // 根据传参，跟服务器要数据
     var that = this;
-    var category_id = options.id, category_title = options.title;
-    wx.request({
-      url: app.globalData.domain + "/categories/" + category_id + ".json?title=" + category_title,
+    var category_id = options.id;
+    common.simpleRequest({
+      url: app.globalData.domain + "/categories/" + category_id + ".json",
       method: "GET",
       header: {
         'content-type': 'application/json' // 默认值
@@ -36,6 +36,23 @@ Page({
         console.log(res.data)
       }
     })
+
+    if (app.globalData.userType == "admin"){
+      console.log("执行admin版权限")
+      // 标题栏变色
+      wx.setNavigationBarColor({
+        frontColor: '#ffffff',
+        backgroundColor: '#000',
+        animation: {
+          duration: 400,
+          // timingFunc: 'easeIn'
+        }
+      })
+      // 标题变名称 
+      wx.setNavigationBarTitle({
+        title: '商品列表 (管理员)'
+      })
+    }
   
   },
 
@@ -97,6 +114,37 @@ Page({
   goToEdit: function (e) {
     wx.navigateTo({
       url: '/pages/product_new/new?pagetype=edit&id=' + e.currentTarget.dataset.id,
+    })
+  },
+  goToDelete: function (e) {
+    wx.showLoading({
+      title: '请稍等'
+    })
+    var that = this;
+    console.log("点击了删除商品，id:", e.currentTarget.dataset.id)
+    common.simpleRequest({
+      url: app.globalData.domain + "/products/" + e.currentTarget.dataset.id + "/delete_form_wechat",
+      data: { id: e.currentTarget.dataset.id },
+      method: "delete",
+      success: function(res){
+        if (res.data.status == "ok"){
+          wx.hideLoading()
+          wx.showModal({
+            title: '提示',
+            content: res.data.info,
+            showCancel: false,
+            success: function (res) {
+              if (res.confirm) {
+                console.log('用户点击确定')
+                that.setData({
+                  hideItem: e.currentTarget.dataset.id
+                })
+                console.log("设置了id为", e.currentTarget.dataset.id, "隐藏")
+              } 
+            }
+          })
+        }
+      }
     })
   }
   

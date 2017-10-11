@@ -1,8 +1,7 @@
  // pages/product_new/new.js
 // 引入公共模板js
-var app = getApp()
-
-var common = require('../../common.js')
+const common = require('../../common.js')
+const app = getApp()
 
 Page({
 
@@ -35,7 +34,7 @@ Page({
     console.log("页面跳转信息", options)
     // 加载服务器根目录下分类数据
     var that = this;
-    wx.request({
+    common.simpleRequest({
       url: app.globalData.domain + "/categories/for_wechat_product_new_picker",
       success: function(res){
         var i = 0,title_arr = [],id_arr = [],title_item_arr = [],id_item_arr = [];
@@ -66,14 +65,17 @@ Page({
         console.log(res)
         console.log("测试：", that.data.id_arr)
         // 判断当页面类型为编辑时的处理：
-          // 获取product详情：
-          that.renderProductDetail(options.id, options.pagetype);          
+          if (options.id != undefined){
+            // 获取product详情：
+            that.renderProductDetail(options.id, options.pagetype);
+          }
+                    
       }
     })
     
 
     // 新增分类时获取一级分类列表
-      wx.request({
+      common.simpleRequest({
         url: app.globalData.domain + "/categories/for_wechat_category_new_picker",
         success: function (res) {
           console.log("加载成功")
@@ -96,7 +98,7 @@ Page({
       })
       console.log("当前页面类型为edit", id)
       var that = this;
-      wx.request({
+      common.simpleRequest({
         url: app.globalData.domain + "/products/" + id + "/get_product_detail",
         success: function (res) {
           console.log("查询到的product_detail", res)
@@ -229,7 +231,7 @@ Page({
     // console.log("当前选择的一级分类", this.data.currentIndex[0] + 1)
     console.log("当前id:", this.data.currentId, this.data.currentTitle)
     let that = this;
-    wx.request({
+    common.simpleRequest({
       url: app.globalData.domain + "/categories/" + this.data.editCategoryId + "/get_category_detail",
       success: function(res){
         console.log(res.data)
@@ -246,6 +248,57 @@ Page({
       }
     })
   },
+  // 按删除按钮前的确认modal
+  delete_category_btn: function(){
+    var that = this;
+    wx.showModal({
+      title: '提示',
+      content: '该分类下的商品也会被一起清除，按确认会继续进行删除！',
+      success: function (res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+          that.delete_category()
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+  },
+  // 删除按钮事件
+  delete_category: function(){
+    var that = this;
+    wx.showLoading({
+      title: '',
+    })
+    common.simpleRequest({
+      url: app.globalData.domain + "/categories/" + that.data.currentId + "/delete_category",
+      method: "POST",
+      success: function (res) {
+        wx.hideLoading()
+        wx.showModal({
+          title: '提示',
+          showCancel: false,
+          content: res.data.info,
+          success: function (res) {
+            if (res.confirm) {
+              console.log('用户点击确定')
+              if (that.data.pageType == "edit") {
+                var url = "/pages/product_new/new?pagetype=edit&id=" + that.data.editProductId
+              } else {
+                var url = "/pages/product_new/new"
+              }
+              wx.redirectTo({
+                url: url,
+              })
+            } else if (res.cancel) {
+              console.log('用户点击取消')
+            }
+          }
+        })
+      }
+    })
+  },
+  
   // 处理新增分类的选择器事件
   bindPickerChangeForCategoryNew: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
@@ -255,6 +308,10 @@ Page({
     if (e.detail.value != 0) {
       this.setData({
         currentParentId: this.data.category_new_id_arr[e.detail.value]
+      })
+    } else {
+      this.setData({
+        currentParentId: ""
       })
     }
     console.log("选择要新增子类的一级分类:", this.data.currentParentId)
@@ -282,7 +339,7 @@ Page({
     let that = this;
     wx.chooseImage({
       count: 9, // 默认9
-      sizeType: 'compressed', // 可以指定是原图还是压缩图，默认二者都有
+      // sizeType: 'compressed', // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
@@ -291,6 +348,15 @@ Page({
           previewImgUrl: res.tempFilePaths
         })
       }
+    })
+  },
+  // 预览增加的图片
+  lookImage: function (res) {
+    var that = this;
+    console.log("标记点9", res.target.dataset.index)
+    wx.previewImage({
+      current: that.data.previewImgUrl[res.currentTarget.dataset.index], // 当前显示图片的http链接
+      urls: that.data.previewImgUrl // 需要预览的图片http链接列表
     })
   },
   // 选取视频事件
@@ -373,8 +439,28 @@ Page({
     console.log("当前的选择：", e.detail.value)
   },
 
-  // 新增、编辑分类的表单提交事件
+
+
+
+
+
+
+  ///////////////////////////////////////////////  //////////// 新增、编辑分类的表单提交事件
   formSubmitForCategoryNew: function (e) {
+    // 先检查是否为新增二级分类，新增时是否有带图片
+    if (this.data.selectedCategoryImgUrl == "" && this.data.currentParentId != ""){
+      console.log("当前图片为空！")
+      console.log("当前选择的分类id：", this.data.currentParentId)
+      console.log("当前准备新增二级分类，但没有图片！")
+      wx.showModal({
+        title: '提示',
+        content: '新增二级分类时，图片不能为空。',
+        showCancel: false
+      })
+      return
+    }
+    // 显示标题Loading
+    wx.showNavigationBarLoading()
     var that = this;
     var value = e.detail.value, url, data;
     var edit_id = that.data.currentCategoryId;
@@ -397,7 +483,7 @@ Page({
        url = app.globalData.domain + "/categories/" + edit_id + "/update_form_api";
        data = { title: value.title, parent_id: parent_id, weight: that.data.formHelperCategoryWeight }
     }
-    wx.request({
+    common.simpleRequest({
       url: url,
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
@@ -410,17 +496,21 @@ Page({
           console.log(that.data.selectedCategoryImgUrl != "");
           console.log(that.data.selectedCategoryImgUrl);
           if (that.data.selectedCategoryImgUrl != ""){
+            console.log("进入了上传图片逻辑")
             wx.uploadFile({
               url: app.globalData.domain + '/categories/' + res.data.id + "/update_image_form_api",
               filePath: that.data.selectedCategoryImgUrl,
+              header: { 'content-type': 'multipart/form-data', 'Authorization': wx.getStorageSync("userToken") },
               name: 'image',
               success: function(ress){
                 console.log(ress)
                 if (ress.data == "ok"){
                   console.log("上传图片成功")
+                  wx.hideNavigationBarLoading()
                   wx.showModal({
                     title: '提示',
-                    content: '新增成功！'
+                    content: '提交成功！',
+                    showCancel: false
                   })
                   that.onLoad()
                   that.setData({
@@ -434,16 +524,20 @@ Page({
               }
             })
           } else {
+            wx.hideNavigationBarLoading()
             wx.showModal({
               title: '提示',
-              content: '新增成功！'
+              content: '提交成功！',
+              showCancel: false
             })
           }
           
         } else {
+          wx.hideNavigationBarLoading()
           wx.showModal({
-            title: '提示',
-            content: '新增失败，请联系管理员',
+            title: '发现错误',
+            content: res.data.info.join("；"),
+            showCancel: false
           })
         }
       }
@@ -461,9 +555,16 @@ Page({
 
   // 新增商品提交表单事件
   formSubmit: function (e) {
+    if (this.data.tempFilePaths == undefined){
+      wx.showModal({
+        title: '提示',
+        content: '您未选择图片,请确保商品有图片哦~',
+        showCancel: false
+      })
+      return false;
+    }
     wx.showLoading({
-      title: '正在提交...',
-      mask: true
+      title: '正在提交...'
     })
     console.log(this.data.tempFilePaths)
     var that = this;
@@ -474,7 +575,7 @@ Page({
     } else {
       var url = app.globalData.domain + '/products/create_form_wechat'
     }
-    wx.request({
+    common.simpleRequest({
       url: url,
       method: "POST",
       header: {
@@ -485,15 +586,17 @@ Page({
         if (res.data.status == "ok") {
           console.log("新增成功")
           var i = 0, x, id = res.data.id;
-          console.log("查看路径")
+          console.log("查看路径准备要上传的图片路径：")
           console.log(that.data.tempFilePaths)
           // 进行图片和视频上传
-          console.log(that.data.previewVideoUrl)
+          console.log("查看视频路径：",that.data.previewVideoUrl)
           common.uploadImgAndVideo(id, that.data.tempFilePaths, that.data.videoTempFilePath, 0)
         } else {
+          wx.hideLoading()
           wx.showModal({
-            title: '提示',
-            content: res.data.status,
+            title: '发生错误！',
+            content: res.data.info.join("；"),
+            showCancel: false
           })
         }
       }

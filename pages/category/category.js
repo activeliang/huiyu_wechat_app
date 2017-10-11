@@ -1,5 +1,6 @@
 // pages/category/category.js
-var app = getApp()
+const common = require('../../common.js')
+const app = getApp()
 Page({
 
   /**
@@ -34,7 +35,7 @@ Page({
 
     
     var that = this;
-    wx.request({
+    common.simpleRequest({
       url: app.globalData.domain + '/categories.json',
       method: "GET",
       header: {
@@ -55,10 +56,10 @@ Page({
     console.log(app.globalData)
     that.setData({
       windowH: sysInfo.windowHeight,
-      windoww: sysInfo.windowWidth
+      windowW: sysInfo.windowWidth
     });
 
-    console.log(defaultData.tree )
+    // console.log(defaultData.tree )
     console.log(this.data.windowH)
   },
 

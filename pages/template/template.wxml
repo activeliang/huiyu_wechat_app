@@ -22,7 +22,7 @@
       <view class='product-show-group'>
       <block wx:for="{{random_product}}">
         <view data-id="{{item.id}}" bindtap='linkToProduct' class='product-show-item'>
-          <image class='product-show-image' style='height: {{windowH * 0.47}}rpx ' src='{{item.image}}'></image>
+          <image class='product-show-image' style='height: {{windowW * 4 / 5 * 0.495}}px ' src='{{item.image}}'></image>
           <view class='random-product-detail'>
             <view class='product-show-title'>{{item.title}}</view>
             <view class='product-show-subtitle'>{{item.sub_title}}</view>

@@ -8,9 +8,24 @@
   padding: 200rpx 0;
   box-sizing: border-box;
 }
+
+@keyframes sliderDown
+{
+from {height: 0%}
+to {height: 100%}
+}
+
+@keyframes sliderUp
+{
+from {height: 100%}
+to {height: 0%}
+}
+
+
+/* 以后是font-awesome的配置 */
 /* 设计全局的字体  */
 view {
-       font-family: gotham, Hiragino Sans GB, STHeiti, Microsoft Yahei, helvetica, arial, sans-serif; 
+        /* font-family: gotham, Hiragino Sans GB, STHeiti, Microsoft Yahei, helvetica, arial, sans-serif;   */
 }
 /* 设置font-awesome */
 @font-face {

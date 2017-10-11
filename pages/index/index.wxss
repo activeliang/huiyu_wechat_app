@@ -116,7 +116,7 @@ margin-top:2rpx;
 
 }
 .line-ui{
-  background:#d8d8d8;
+  background:#f3f3f3;
 height:10rpx;
 width:100%;
 
@@ -125,11 +125,12 @@ width:100%;
 
 }
 .vidio-title{
-  font-size:27rpx;
+font-size:27rpx;
 color:#666;
-padding:8rpx;
-padding-left:13rpx;
-padding-bottom: 4rpx;
+padding:10rpx;
+padding-left:30rpx;
+padding-bottom:6rpx;
+
 }
 .img-title{
  border-bottom:0.5px solid #d7d7d7;
@@ -138,7 +139,7 @@ padding-bottom: 4rpx;
 .shop-img{
 width:31.1%;
 padding:1.1%;
-height:170rpx;
+height:200rpx;
 
 }
 .shop-img-group{

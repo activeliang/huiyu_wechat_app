@@ -12,14 +12,14 @@
   <view name="product_list">
     <view class='product-list'>
     <block wx:for="{{product_list}}">
-      <view bindtap='navigationTo' data-id="{{item.id}}" class='product-item'>
+      <view wx:if="{{item.id != hideItem}}" bindtap='navigationTo' data-id="{{item.id}}" class='product-item'>
         <image class='product-image' src='{{item.image}}'></image>
         <view class='product-detail'>
           <view class='product-title'>{{item.title}}</view>
           <view class='product-subtitle'>{{item.sub_title}}</view>
           <view class='product-price'>{{item.price}} 元</view>
-          <view catchtap="goToEdit" data-id="{{item.id}}" class='edit-btn'>编辑</view>
-          <view class='edit-btn  delete-btn'>删除</view>
+          <view wx:if="{{userType == 'admin'}}" catchtap="goToEdit" data-id="{{item.id}}" class='edit-btn'>编辑</view>
+          <view wx:if="{{userType == 'admin'}}" catchtap='goToDelete' data-id="{{item.id}}" class='edit-btn  delete-btn'>删除</view>
         </view>
       </view>
     </block>

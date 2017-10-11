@@ -1,6 +1,7 @@
 // pages/map/map.js
-var QQMapWX = require('../../libs/qqmap-wx-jssdk.js');
-var qqmapsdk;
+const common = require('../../common.js')
+const app = getApp()
+
 Page({
 
   /**
@@ -14,10 +15,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // 实例化API核心类
-    qqmapsdk = new QQMapWX({
-      key: 'SU7BZ-356WU-QFXVK-4JQ7X-ZMVUV-KXFSL'
-    });
+
 
     // 获取打开小程序时所在的位置
     var that = this;
