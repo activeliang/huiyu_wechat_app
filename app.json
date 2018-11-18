@@ -7,13 +7,13 @@
     "pages/product_list/list",
     "pages/product/detail",
     "pages/admin_login/login",
-    "pages/admin/index",        
-    "pages/product_new/new",      
+    "pages/admin/index",
+    "pages/product_new/new",
     "pages/search/search",
     "pages/category_new/new",
-    "pages/map/map",
     "pages/my_collects/index",
-    "pages/login_log/index"
+    "pages/login_log/index",
+    "pages/test/test"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -33,20 +33,20 @@
       {
         "pagePath": "pages/find_more/index",
         "text": "发现",
-                "iconPath": "img/03.png",
-                "selectedIconPath": "img/04.png"
+        "iconPath": "img/03.png",
+        "selectedIconPath": "img/04.png"
       },
       {
         "pagePath": "pages/category/category",
         "text": "分类",
-                "iconPath": "img/01.png",
-                "selectedIconPath": "img/02.png"
+        "iconPath": "img/01.png",
+        "selectedIconPath": "img/02.png"
       },
       {
         "pagePath": "pages/profile/index",
         "text": "我的",
-                "iconPath": "img/08.png",
-                "selectedIconPath": "img/07.png"
+        "iconPath": "img/08.png",
+        "selectedIconPath": "img/07.png"
       }
     ]
   },

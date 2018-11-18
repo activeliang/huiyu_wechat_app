@@ -1,5 +1,10 @@
 <!--pages/category/category.wxml-->
-<view class='container-fluid' >
+<view wx:if="{{loadJob == undefined}}" style="text-align: center; margin-top: 90rpx; color: #666;">
+  <i class="fa fa-spinner fa-spin fa-fw"></i>加载中...
+</view>
+
+<view wx:else>
+  <view class='container-fluid' >
   <!-- 左侧栏 -->
   <scroll-view scroll-y style="height: {{windowH}}px" class='nav-lef'>
     <block wx:for="{{category_tree.tree}}">
@@ -36,4 +41,5 @@
       
     </block>
   </scroll-view>
+</view>
 </view>

@@ -1,76 +1,76 @@
 /* pages/admin/index.wxss */
-.page-bc{
-  background:#f8f8f8;
-padding-top:30rpx;
-
+.page-bc {
+  background: #f8f8f8;
+  padding-top: 30rpx;
 }
-.btn-label{}
-.admin-option{
-  padding-bottom:50px;
-  padding-top:30rpx;
 
+.btn-label {
 }
-.btn-item{
-  background:#fff;
-border-top:0.5px solid #f1f1f1;
-border-bottom:1rpx solid #f1f1f1;
-padding:20rpx 20rpx 20rpx 40rpx;
-color:#555;
-font-size:35rpx;
 
+.admin-option {
+  padding-bottom: 50px;
+  padding-top: 30rpx;
 }
-.fa-chevron-right{
-  float:right;
-position:relative;
-line-height:54rpx;
-color:#2dbe60;
 
+.btn-item {
+  background: #fff;
+  border-top: 0.5px solid #d9d9d9;
+  border-bottom: 1rpx solid #d9d9d9;
+  padding: 20rpx 20rpx 20rpx 40rpx;
+  color: #555;
+  font-size: 35rpx;
+  margin-bottom: 15rpx;
 }
-.logs-label{
-color:#b1b1b1;
-font-size:26rpx;
-padding-left:20rpx;
-border-bottom:1rpx solid #e1e1e1;
-padding-bottom:10rpx;
 
+.fa-chevron-right {
+  float: right;
+  position: relative;
+  line-height: 54rpx;
+  color: #2dbe60;
 }
-.user-group{
-  padding:15px 2.5%;
-display:flex;
-flex-flow:row wrap;
-background: #fff;
 
+.logs-label {
+  color: #b1b1b1;
+  font-size: 26rpx;
+  padding-left: 20rpx;
+  border-bottom: 1rpx solid #e1e1e1;
+  padding-bottom: 10rpx;
 }
-.user-item{
-width:20%;
-padding:2.5%;
-margin-top:-30rpx;
 
-
+.user-group {
+  padding: 15px 2.5%;
+  display: flex;
+  flex-flow: row wrap;
+  background: #fff;
+  border-bottom: 1rpx solid #e8e8e8;
 }
-.times-label{
-position:relative;
-background:#F81E3C;
-color:#fff;
-border-radius:50px;
-padding:2rpx 12rpx;
-font-size:26rpx;
-left:81%;
-display:inline;
-top:20rpx;
 
-
+.user-item {
+  width: 20%;
+  padding: 2.5%;
+  margin-top: -30rpx;
 }
-.user-avatar{
-width:100%;
-border-radius:8px;
 
-
+.times-label {
+  position: relative;
+  background: #F81E3C;
+  color: #fff;
+  border-radius: 50px;
+  padding: 2rpx 12rpx;
+  font-size: 26rpx;
+  left: 81%;
+  display: inline;
+  top: 20rpx;
 }
-.user-nickname{
-  color:#888;
-font-size:27rpx;
+
+.user-avatar {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.user-nickname {
+  color: #888;
+  font-size: 27rpx;
 /* font-weight:300; */
-text-align:center;
-
+  text-align: center;
 }

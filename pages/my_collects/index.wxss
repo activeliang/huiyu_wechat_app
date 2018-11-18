@@ -1,104 +1,101 @@
 /* pages/my_collects/index.wxss */
-.title-slogan{
+.title-slogan {
   text-align: center;
-  margin:30rpx;
-
+  margin: 30rpx;
 }
-.no-collect-alert{
-  text-align:center
-}
-.alert-info{
-  color:#888;
-margin:60rpx;
 
+.no-collect-alert {
+  text-align: center
 }
-.navigation-btn{
-  background:#ec702e;
-color:#fff;
-width:85%;
-margin:0 auto;
-padding:20rpx;
-border-radius:4px;
 
+.alert-info {
+  color: #888;
+  margin: 60rpx;
+}
+
+.navigation-btn {
+  background: #ec702e;
+  color: #fff;
+  width: 85%;
+  margin: 0 auto;
+  padding: 20rpx;
+  border-radius: 4px;
 }
 
 
 
 /* 以下是product_list的样式 */
-.line{
-height:1rpx;
-background:#e3e3e3;
-display:inline-block;
-position:relative;
-top:-12rpx;
-width:37rpx;
-margin:0 16rpx;
-
+.line {
+  height: 1rpx;
+  background: #e3e3e3;
+  display: inline-block;
+  position: relative;
+  top: -12rpx;
+  width: 37rpx;
+  margin: 0 16rpx;
 }
-.category-title{
+
+.category-title {
   display: inline;
   text-align: center;
 }
-.edit-btn{
-float:right;
-position:absolute;
-right:30rpx;
-bottom:8rpx;
-background:#2dbe60;
-padding:10rpx 20rpx;
-border:1rpx solid #fff;
-border-radius:11rpx;
-font-size:25rpx;
-color:#fff;
 
-
-
+.edit-btn {
+  float: right;
+  position: absolute;
+  right: 30rpx;
+  bottom: 8rpx;
+  background: #2dbe60;
+  padding: 10rpx 20rpx;
+  border: 1rpx solid #fff;
+  border-radius: 11rpx;
+  font-size: 25rpx;
+  color: #fff;
 }
-.delete-btn{
-  right:20rpx;
+
+.delete-btn {
+  right: 20rpx;
 }
 
 /* 以下是模板的模式 */
-.product-item{
-  background:#fff;
-padding:15rpx 0;
-border-bottom:1rpx solid #f1f1f1;
-margin:0 28rpx;
-position:relative;
-display:flex;
-
+.product-item {
+  background: #fff;
+  padding: 15rpx 0;
+  border-bottom: 1rpx solid #f1f1f1;
+  margin: 0 28rpx;
+  position: relative;
+  display: flex;
 }
-.product-image{
+
+.product-image {
   max-width: 24%;
   max-height: 150rpx;
   float: left;
-  margin-right:27rpx;
-
+  margin-right: 27rpx;
 }
-.product-detail{
-  font-size:30rpx;
-min-height:150rpx;
 
+.product-detail {
+  font-size: 30rpx;
+  min-height: 150rpx;
 }
-.product-title{
-font-size:32rpx;
-color:#222;
-position:relative;
+
+.product-title {
+  font-size: 32rpx;
+  color: #222;
+  position: relative;
 /* top:-6rpx; */
-
-
-
 }
-.product-subtitle{
-font-size:26rpx;
-color:#999;
-top:-2rpx;
+
+.product-subtitle {
+  font-size: 26rpx;
+  color: #999;
+  top: -2rpx;
 /* max-height:64rpx; */
 }
-.product-price{
-font-size:28rpx;
-color:#E67C3A;
-position:relative;
-top:8rpx;
 
+.product-price {
+  font-size: 28rpx;
+  color: #E67C3A;
+  position: relative;
+  top: 8rpx;
 }

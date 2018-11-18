@@ -1,150 +1,138 @@
 /* pages/index/index.wxss */
-.index-img{
-  width:100%;
-
+.index-img {
+  width: 100%;
 }
-.shop-name{
-position:relative;
-margin-top:-90rpx;
-margin-left:40rpx;
 
-
+.shop-name {
+  position: relative;
+  margin-top: -90rpx;
+  margin-left: 40rpx;
 }
-.logo{
-width:20%;
-height:140rpx;
-padding:7rpx;
-background:#fff;
-top:-90rpx;
-border-radius:10rpx;
-left:32rpx;
-float:left;
-border:1rpx solid #f4f4f4;
 
-
-
-}
-.logo-title{
-position:relative;
-left:9rpx;
-top:94rpx;
-font-size:38rpx;
-color:#444;
-border-bottom:0.5px solid #d7d7d7;
-width:38%;
-float:left;
-padding-left:17rpx;
-
-
-
-}
-.fa-share-square-o{
-position:relative;
-font-size:34rpx;
-line-height:51rpx;
-color:#2dbe60;
-
-}
-button::after {
-border: 0  
-
-}
-button{
+.logo {
+  width: 20%;
+  height: 140rpx;
+  padding: 7rpx;
   background: #fff;
-  overflow:initial;
-padding:0 25rpx;
-
-}
-.open-time{
-clear:left;
-padding:20rpx 40rpx;
-font-size:32rpx;
-color:#666;
-padding-top:30rpx;
-
-
-
-}
-.fa-clock-o{
-  color:#d8d8d8;
-margin-right:10rpx;
-
-}
-.fa-phone{
-float:right;
-line-height:50rpx;
-padding-left:30rpx;
-border-left:1rpx solid #d3d3d3;
-font-size:50rpx;
-color:#2dbe60;
-padding-right:30rpx;
-margin-right:-30rpx;
-
-
-}
-.address{
-padding:10rpx 40rpx;
-font-size:32rpx;
-color:#666;
-padding-left:44rpx;
-padding-bottom:20rpx;
-
-
-}
-.fa-map-marker{
-  color:#d8d8d8;
-margin-right:10rpx;
-
-}
-.fa-chevron-right{
-  float:right;
-padding-left:30rpx;
-color:#2dbe60;
-line-height:44rpx;
-font-size:22rpx;
-
-}
-.label-success{
-float:right;
-font-size:22rpx;
-border-radius:8rpx;
-padding:0rpx 10rpx;
-line-height:36rpx;
-margin-top:2rpx;
-
-
-
-}
-.line-ui{
-  background:#f3f3f3;
-height:10rpx;
-width:100%;
-
-}
-.shop-video{
-
-}
-.vidio-title{
-font-size:27rpx;
-color:#666;
-padding:10rpx;
-padding-left:30rpx;
-padding-bottom:6rpx;
-
-}
-.img-title{
- border-bottom:0.5px solid #d7d7d7;
+  top: -90rpx;
+  border-radius: 10rpx;
+  left: 32rpx;
+  float: left;
+  border: 1rpx solid #f4f4f4;
 }
 
-.shop-img{
-width:31.1%;
-padding:1.1%;
-height:200rpx;
-
+.logo-title {
+  position: relative;
+  left: 9rpx;
+  top: 94rpx;
+  font-size: 38rpx;
+  color: #444;
+  border-bottom: 0.5px solid #d7d7d7;
+  width: 38%;
+  float: left;
+  padding-left: 17rpx;
 }
-.shop-img-group{
-  display:flex;
-flex-flow:row wrap;
-padding:2%;
 
+.fa-share-square-o {
+  position: relative;
+  font-size: 34rpx;
+  line-height: 51rpx;
+  color: #2dbe60;
+}
+
+button::after {
+  border: 0
+}
+
+button {
+  background: #fff;
+  overflow: initial;
+  padding: 0 25rpx;
+}
+
+.open-time {
+  clear: left;
+  padding: 20rpx 40rpx;
+  font-size: 32rpx;
+  color: #666;
+  padding-top: 30rpx;
+}
+
+.fa-clock-o {
+  color: #d8d8d8;
+  margin-right: 10rpx;
+}
+
+.fa-phone {
+  float: right;
+  line-height: 50rpx;
+  padding-left: 30rpx;
+  border-left: 1rpx solid #d3d3d3;
+  font-size: 50rpx;
+  color: #2dbe60;
+  padding-right: 30rpx;
+  margin-right: -30rpx;
+}
+
+.address {
+  padding: 10rpx 40rpx;
+  font-size: 32rpx;
+  color: #666;
+  padding-left: 44rpx;
+  padding-bottom: 20rpx;
+}
+
+.fa-map-marker {
+  color: #d8d8d8;
+  margin-right: 10rpx;
+}
+
+.fa-chevron-right {
+  float: right;
+  padding-left: 30rpx;
+  color: #2dbe60;
+  line-height: 44rpx;
+  font-size: 22rpx;
+}
+
+.label-success {
+  float: right;
+  font-size: 22rpx;
+  border-radius: 8rpx;
+  padding: 0rpx 10rpx;
+  line-height: 36rpx;
+  margin-top: 2rpx;
+}
+
+.line-ui {
+  background: #f3f3f3;
+  height: 10rpx;
+  width: 100%;
+}
+
+.shop-video {
+}
+
+.vidio-title {
+  font-size: 27rpx;
+  color: #666;
+  padding: 10rpx;
+  padding-left: 30rpx;
+  padding-bottom: 6rpx;
+}
+
+.img-title {
+  border-bottom: 0.5px solid #d7d7d7;
+}
+
+.shop-img {
+  width: 31.1%;
+  padding: 1.1%;
+  height: 200rpx;
+}
+
+.shop-img-group {
+  display: flex;
+  flex-flow: row wrap;
+  padding: 2%;
 }

@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    btn_status: "hide"
+    btn_status: "true"
   },
 
   /**
@@ -121,5 +121,11 @@ Page({
         btn_status: "hide"
       })
     }
+  },
+  epmty: function(){
+    wx.removeStorageSync("userToken")
+    wx.showToast({
+      title: 'nnnnnnnnn',
+    })
   }
 })

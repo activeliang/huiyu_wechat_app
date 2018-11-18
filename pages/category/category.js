@@ -43,7 +43,8 @@ Page({
       },
       success: function (res) {
         that.setData({
-          category_tree: res.data
+          category_tree: res.data,
+          loadJob: "ok"
         })
         console.log(res.data)
       }
@@ -114,7 +115,7 @@ Page({
       console.log(res.target)
     }
     return {
-      title: '汇宇通产品中心',
+      title: '至爱珠宝产品中心',
       path: '/pages/category/category',
       success: function (res) {
         // 转发成功

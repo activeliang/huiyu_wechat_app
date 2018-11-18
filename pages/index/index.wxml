@@ -1,4 +1,9 @@
-<!--pages/index/index.wxml-->
+<view wx:if="{{loadJob == undefined}}" style="text-align: center; margin-top: 90rpx; color: #666;">
+  <i class="fa fa-spinner fa-spin fa-fw"></i>加载中...
+</view>
+
+<view wx:else>
+  <!--pages/index/index.wxml-->
 <image class='index-img' style='height: {{windowW * 0.625}}px' src='{{homesetData.banner.small.url}}'></image>
 <view class='shop-name'>
   <image class='logo' src='{{homesetData.logo.url}}'></image>
@@ -19,7 +24,7 @@
     门店视频
     <i class="fa fa-video-camera" aria-hidden="true"></i>
   </view>
-  <video class='shop-video' controls style="width: 100%; " src='{{homesetData.shop_video.url}}'></video>
+  <video class='shop-video' id='myVideo' controls bindplay="start_video" bindended="end_video" style="width: 100%; " src='{{homesetData.shop_video.url}}'></video>
 </block>
 <view class='line-ui'></view>
 <!-- 门店图片 -->
@@ -34,3 +39,5 @@
     </block>
   </view>
 </block>
+
+</view>

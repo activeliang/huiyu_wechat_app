@@ -7,9 +7,10 @@ function uploadImgAndVideo(id, imgPath, videoPath, i) {
     wx.hideLoading()
     wx.showModal({
       title: '提示',
-      content: '提交成功！',
+      content: '1提交成功！',
       showCancel: false
     })
+    return;
   } else {
   console.log(imgPath.length )
   console.log("I等于",i)
@@ -30,27 +31,30 @@ function uploadImgAndVideo(id, imgPath, videoPath, i) {
         console.log("文件地址：", id, imgPath, videoPath, i)
         uploadImgAndVideo(id, imgPath, videoPath, i)
       },
-      complete: function(res2){
+      complete: function (res2){
         if (i = imgPath.length - 1){
           if (videoPath == undefined){
             wx.hideLoading()
             console.log("标记点2：", res2.data)
-            if (res2.data == "ok"){
+            console.log("解析后的数据：", JSON.parse(res2.data))
+            if (JSON.parse(res2.data).status == "ok"){
             wx.showModal({
               title: '提示',
-              content: '提交成功！',
+              content: '2提交成功！',
               showCancel: false,
               success: function (res) {
                 // 当用户点击了确定后，刷新当前页面
                 if (res.confirm) {
                   console.log('用户点击确定')
-                  wx.redirectTo({
-                    url: '/pages/product_new/new',
-                  })
+                  // wx.redirectTo({
+                  //   url: '/pages/product_new/new',
+                  // })
                 } 
               }
             })
             } else {
+              wx.hideLoading()
+              console.log("返回的数据：", res2)
               wx.showModal({
                 title: '发生错误',
                 content: "权限错误",
@@ -85,13 +89,14 @@ function uploadVideo(id, videoPath) {
     filePath: videoPath,
     name: 'video',
     success: function(res){
-      if (res.data == "ok"){
+      console.log("解析后的数据：", JSON.parse(res.data))
+      if (JSON.parse(res.data).status == "ok"){
       console.log("上传视频")
       console.log(res.data)
       wx.hideLoading()
       wx.showModal({
         title: '提示',
-        content: '提交成功！',
+        content: '3提交成功！',
         showCancel: false,
         success: function (res) {
           // 当用户点击确定后，刷新面前页面
@@ -104,6 +109,8 @@ function uploadVideo(id, videoPath) {
         }
       })
       } else {
+        console.log("发生的错误：", res)
+        wx.hideLoading()
         wx.showModal({
           title: '发生错误',
           content: "权限错误",
@@ -126,10 +133,14 @@ function uploadVideo(id, videoPath) {
 
 
 // 自动在request的header中加入验证的封装方法
+var sum = 9;
 function simpleRequest(obj) {
-  var sum = 0;
+  // 先拿出之前初始化登入的数据：
+  console.log("拿出当前所有globalData", app.globalData)
+  console.log("查看当前缓存中的userToken:", wx.getStorageSync("userToken"))
   // 检测初始化是否已经完成
-  if (app.globalData.loginStatus == "ok"){
+  if (app.globalData.loginStatus == "ok" && app.globalData.userToken != "" && wx.getStorageSync("userToken") != ""){
+    console.log("拿出当前LogingSTatus:", app.globalData.loginStatus)
     console.log("当前初始化登录状态为”成功“！")
     // 当初始化成功时直接发起请求
     var header = obj.header || {}
@@ -166,7 +177,7 @@ function simpleRequest(obj) {
         app.initialLogin()
       }
       simpleRequest(obj)
-    },330)
+    },230)
 
   }
 }
@@ -174,15 +185,11 @@ function simpleRequest(obj) {
 // 当新增商品上传图片失败时，删除已新增的商品，
 function delete_proudct(product_id){
   simpleRequest({
-    url: app.globalData.domain + "delete_form_wechat",
+    url: app.globalData.domain + "/products/" + product_id + "/delete_form_wechat",
     data: {id: product_id},
-    method: "DELETE"
+    method: "POST"
   })
 }
-
-
-
-
 
 module.exports.uploadImgAndVideo = uploadImgAndVideo
 exports.simpleRequest = simpleRequest

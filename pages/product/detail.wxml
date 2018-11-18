@@ -1,7 +1,11 @@
-
 <!--pages/product/detail.wxml-->
 
-<!-- 引入模板 -->
+<view wx:if="{{loadJob == undefined}}" style="text-align: center; margin-top: 90rpx; color: #666;">
+  <i class="fa fa-spinner fa-spin fa-fw"></i>加载中...
+</view>
+
+<view wx:else>
+  <!-- 引入模板 -->
 <import src="/pages/template/template.wxml"/>
 
 <view class='container-fluid'> 
@@ -47,4 +51,5 @@
     <view bindtap='add_collect' class='add-collect'>收藏</view>
     <button bindtap='share_btn' open-type="share" class='share-btn'>转发分享</button>
   </view>
+</view>
 </view>

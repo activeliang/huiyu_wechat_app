@@ -39,15 +39,6 @@ Page({
 
     if (app.globalData.userType == "admin"){
       console.log("执行admin版权限")
-      // 标题栏变色
-      wx.setNavigationBarColor({
-        frontColor: '#ffffff',
-        backgroundColor: '#000',
-        animation: {
-          duration: 400,
-          // timingFunc: 'easeIn'
-        }
-      })
       // 标题变名称 
       wx.setNavigationBarTitle({
         title: '商品列表 (管理员)'

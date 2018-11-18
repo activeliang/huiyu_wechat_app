@@ -1,13 +1,17 @@
 <!--pages/admin/index.wxml-->
 <view class='page-bc' style='min-height: {{windowH + 49}}px'>
   <view class='admin-option'>
+  <!-- 第一个按钮 -->
     <view class='btn-item' bindtap='navigationToProductNew'>
       去新增商品、分类
       <i class="fa fa-chevron-right" aria-hidden="true"></i>
     </view>
+    <!-- 第二个按钮 -->
+    <view class='btn-item' bindtap='remove_storage'>
+      清除本地缓存（测试用）
+      <i class="fa fa-chevron-right" aria-hidden="true"></i>
+    </view>
   </view>
-
-
 
   <view class='label logs-label'>近30天用户登录次数统计...</view>
   <!-- 以下是最后一个月的登入用户记录 -->
@@ -15,7 +19,7 @@
     <block wx:for="{{recent_users}}">
       <view bindtap='show_user_login_log' data-id="{{item.id}}" class='user-item'>
         <view class='times-label'>{{item.times}}</view>
-        <image class='user-avatar' src='{{item.detail.avatar_url}}' style='height: {{windowW * 0.2}}px'></image>
+        <image class='user-avatar' src='{{item.detail.avatar_url}}' style='height: {{windowW * 0.19}}px'></image>
         <view class='user-nickname'>{{item.detail.nickname}}</view>
       </view>
     </block>

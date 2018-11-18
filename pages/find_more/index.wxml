@@ -1,8 +1,11 @@
 <!--pages/welcome/index.wxml-->
-<!-- 首页 -->
+<view wx:if="{{loadJob == undefined}}" style="text-align: center; margin-top: 90rpx; color: #666;">
+  <i class="fa fa-spinner fa-spin fa-fw"></i>加载中...
+</view>
 
 
-  <!-- 搜索框 -->
+<view wx:else>
+    <!-- 搜索框 -->
   <view class='search-item'>
     <button bindtap='gotosearch' class='search-btn'><icon class='search-icon' type='search' size='12'/>搜索商品</button>
   </view>
@@ -11,7 +14,7 @@
     <block wx:for="{{sliderGroup}}">
     <swiper-item bindtap="slider_navigation" data-id="{{item.id}}" >
       <image src='{{item.small_image}}' style='height: {{windowW * 0.625}}px' class='slider-image-item' />
-      <view class='product-screen-bc'>
+      <view style='display: none;' class='product-screen-bc'>
         <view class='product-screen'>
         <view class='screen-title'>{{item.title}}</view>
         <view class='screen-subtitle'>{{item.sub_title}}</view>
@@ -49,3 +52,4 @@
       </view>
     </block>
   </view>
+</view>

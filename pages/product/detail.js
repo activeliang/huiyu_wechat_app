@@ -31,7 +31,8 @@ Page({
           random_product: res.data.random_product,
           windowH: app.globalData.sysInfo.windowHeight,
           windowW: app.globalData.sysInfo.windowWidth,
-          main_img: res.data.product_main_img
+          main_img: res.data.product_main_img,
+          loadJob: "ok"
         })
         console.log(res.data)
       }
@@ -91,7 +92,7 @@ Page({
       console.log(res.target)
     }
     return {
-      title: "【汇宇通】" + this.data.product.title,
+      title: "【至爱珠宝】" + this.data.product.title,
       path: '/pages/product/detail?id=' + this.data.currentProductId,
       success: function (res) {
         // 转发成功

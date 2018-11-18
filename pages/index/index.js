@@ -16,6 +16,9 @@ Page({
    */
   onLoad: function (options) {
     
+    // 初始化视频窗口
+    this.videoContext = wx.createVideoContext('myVideo')
+    
     // 获取打开小程序时所在的位置
     var that = this;
     wx.getLocation({
@@ -38,7 +41,8 @@ Page({
       success: function (res) {
         that.setData({
           homesetData: res.data.homeset,
-          shopImages: res.data.shop_images
+          shopImages: res.data.shop_images,
+          loadJob: "ok"
         })
       }
     })    
@@ -51,7 +55,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+    
   },
 
   /**
@@ -98,7 +102,7 @@ Page({
       console.log(res.target)
     }
     return {
-      title: 汇宇通小程序,
+      title: 至爱珠宝小程序,
       path: '/pages/index/index',
       success: function (res) {
         wx.showToast({
@@ -119,26 +123,26 @@ Page({
   // 打开地图
   show_map: function(){
     wx.openLocation({
-      latitude: 34.264892,
-      longitude: 108.950476,
+      latitude: 22.958615,
+      longitude: 113.46191,
       scale: 15,
-      name: "汇宇通通讯",
-      address: "西安市新城区西新街海星智能广场负一层西厅A6"
+      name: "至爱珠宝",
+      address: "广州市番禺区石基镇永善村永峰路5号"
     })
   },
   // 查询两点行驶距离（步行或驾车）
   get_distance: function (origin) {
     var that = this;
     console.log("标记点2", origin)
-    console.log("标记点7", that.getDistance(that.data.lat, that.data.lng, 34.266597, 108.949333))
-    if (that.getDistance(that.data.lat, that.data.lng, 34.266597, 108.949333) > 5000){
+    console.log("标记点7", that.getDistance(that.data.lat, that.data.lng, 22.958615, 113.46191))
+    if (that.getDistance(that.data.lat, that.data.lng, 22.958615, 113.46191) > 5000){
       var url = 'https://restapi.amap.com/v3/direction/driving?'
     } else {
       var url = 'https://restapi.amap.com/v3/direction/walking?'
     }
     wx.request({
       url: url,
-      data: { key: "f30da713208bfd50ec9d0943e21482bd", destination: "108.950476,34.264892", origin: origin },
+      data: { key: "f30da713208bfd50ec9d0943e21482bd", destination: "113.46191, 22.958615", origin: origin },
       success: function (res) {
         console.log("标记点1", res);
         console.log("标记点4", res.data.route.paths[0].distance + 'm');
@@ -173,5 +177,17 @@ Page({
       current: this.data.shopImages[e.currentTarget.dataset.index], // 当前显示图片的http链接
       urls: this.data.shopImages // 需要预览的图片http链接列表
     })
+  },
+
+  // 点击播放视频
+  start_video: function(e){
+    console.log("开始播放视频！");
+    this.videoContext.requestFullScreen({
+      direction: 0
+    });
+  },
+  end_video: function(e){
+    console.log("播放结束！")
+    this.videoContext.exitFullScreen();
   }
 })

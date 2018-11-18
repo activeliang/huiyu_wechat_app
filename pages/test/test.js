@@ -1,7 +1,4 @@
-// pages/map/map.js
-const common = require('../../common.js')
-const app = getApp()
-
+// pages/test/test.js
 Page({
 
   /**
@@ -15,23 +12,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
-
-    // 获取打开小程序时所在的位置
-    var that = this;
-    wx.getLocation({
-      type: 'wgs84',
-      success: function (res) {
-        console.log(res)
-        that.setData({
-          lat: res.latitude,
-          lng: res.longitude
-        })
-      }
-    })
-    console.log(this.data.lng)
+  
   },
-
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -44,8 +26,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
-},
+  
+  },
 
   /**
    * 生命周期函数--监听页面隐藏

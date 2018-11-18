@@ -26,7 +26,6 @@ Page({
         })
       }
     })
-    
   },
 
   /**
@@ -78,29 +77,13 @@ Page({
   
   },
   navigationToProductNew: function () {
-    console.log("what!!!!!!!!!!")
     wx.navigateTo({
       url: '/pages/product_new/new'
-    })
-  },
-  navigationToTest: function () {
-    wx.navigateTo({
-      url: '/pages/test/text',
-    })
-  },
-  go_to_map: function () {
-    wx.navigateTo({
-      url: '/pages/map/map',
     })
   },
   go_to_admin_required: function () {
     wx.navigateTo({
       url: '/pages/admin_login/login',
-    })
-  },
-  go_to_my_collects: function () {
-    wx.navigateTo({
-      url: '/pages/my_collects/index',
     })
   },
   show_user_login_log: function(e){

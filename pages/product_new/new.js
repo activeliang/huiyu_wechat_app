@@ -339,7 +339,7 @@ Page({
     let that = this;
     wx.chooseImage({
       count: 9, // 默认9
-      // sizeType: 'compressed', // 可以指定是原图还是压缩图，默认二者都有
+      sizeType: 'compressed', // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
@@ -495,16 +495,16 @@ Page({
         if (res.data.status == "ok") {
           console.log(that.data.selectedCategoryImgUrl != "");
           console.log(that.data.selectedCategoryImgUrl);
-          if (that.data.selectedCategoryImgUrl != ""){
+          if (that.data.selectedCategoryImgUrl != null){
             console.log("进入了上传图片逻辑")
             wx.uploadFile({
-              url: app.globalData.domain + '/categories/' + res.data.id + "/update_image_form_api",
+              url: app.globalData.domain + '/categories/' + res.data.id + "/update_form_api",
               filePath: that.data.selectedCategoryImgUrl,
               header: { 'content-type': 'multipart/form-data', 'Authorization': wx.getStorageSync("userToken") },
               name: 'image',
               success: function(ress){
                 console.log(ress)
-                if (ress.data == "ok"){
+                if (JSON.parse(ress.data).status == "ok"){
                   console.log("上传图片成功")
                   wx.hideNavigationBarLoading()
                   wx.showModal({
@@ -553,7 +553,7 @@ Page({
   },
   
 
-  // 新增商品提交表单事件
+  ////////////////////////////////////////////////////// 新增商品提交表单事件
   formSubmit: function (e) {
     if (this.data.tempFilePaths == undefined){
       wx.showModal({
@@ -648,6 +648,6 @@ Page({
       data.multiIndex[1] = 0;
     }
     this.setData(data);
-  },
+  }
   
 })
