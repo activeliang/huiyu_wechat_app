@@ -1,17 +1,43 @@
-<!--pages/welcome/index.wxml-->
-<!-- 首页 -->
-
-<view class='container-fluid'>
-  <!-- 搜索框 -->
-  <view class='search-item'>
-    <button bindtap='gotosearch' class='search-btn'><icon class='search-icon' type='search' size='12'/>搜索商品</button>
-  </view>
-
-  <!-- 轮播图 -->
-
-
-<view id="outer" bind:touchmove="handleTap1">
-  outer view
+<view wx:if="{{loadJob == undefined}}" style="text-align: center; margin-top: 90rpx; color: #666;">
+  <i class="fa fa-spinner fa-spin fa-fw"></i>加载中...
 </view>
-  
+
+<view wx:else>
+  <!--pages/index/index.wxml-->
+<image class='index-img' style='height: {{windowW * 0.625}}px' src='{{homesetData.banner.small.url}}'></image>
+<view class='shop-name'>
+  <image class='logo' src='{{homesetData.logo.url}}'></image>
+  <view class='logo-title'>{{homesetData.shop_title}}<button open-type="share" class="fa fa-share-square-o" aria-hidden="true"></button></view>
+</view>
+<!-- 营业时间 -->
+<view class='open-time'>
+  <i class="fa fa-clock-o" aria-hidden="true"></i>{{homesetData.open_time}} 
+  <!-- 打电话 -->
+  <i class="fa fa-phone" bindtap="make_call" aria-hidden="true"></i>
+</view>
+<!-- 地址导航 -->
+<view bindtap='show_map' class='address'><i class="fa fa-map-marker" aria-hidden="true"></i>{{homesetData.address}} <i class="fa fa-chevron-right" aria-hidden="true"></i><span style="border: {{distance == underfind ? '' : '1rpx solid #07B642;'}}" class="label label-success">{{distance}}</span></view>
+<view class='line-ui'></view>
+<!-- 门店视频 -->
+<block wx:if="{{homesetData.shop_video.url}}">
+  <view class='vidio-title'>
+    门店视频
+    <i class="fa fa-video-camera" aria-hidden="true"></i>
+  </view>
+  <video class='shop-video' id='myVideo' controls bindplay="start_video" bindended="end_video" style="width: 100%; " src='{{homesetData.shop_video.url}}'></video>
+</block>
+<view class='line-ui'></view>
+<!-- 门店图片 -->
+<block wx:if="{{shopImages}}">
+  <view class='vidio-title img-title'>
+    门店图片
+    <i class="fa fa-picture-o" aria-hidden="true"></i>
+  </view>
+  <view class='shop-img-group'>
+    <block wx:for="{{shopImages}}">
+      <image bindtap='imgpreview' data-index="{{index}}" class='shop-img' src='{{item}}'></image>
+    </block>
+  </view>
+</block>
+
 </view>

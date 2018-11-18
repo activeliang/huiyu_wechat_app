@@ -1,42 +1,106 @@
 <!--pages/product_new/new.wxml-->  
-<!-- 选取图片框 -->
-<view class='label'>产品图片</view>
-<view class='img-selector'>
-  <view class='img-preview'>
-    <block wx:for="{{previewImgUrl}}">
-      <image src='{{item}}' class='preview-item' />
-    </block>
-  </view>
-  <button bindtap='select_image' class='select-btn' >+</button>
+
+
+
+<view class='product-new-page'>
+<view class='legend-title'>{{ pageType == "edit" ? "编辑表单" : "新增表单"}}<i class="fa fa-cubes" aria-hidden="true"></i></view>
+<!-- 多列选择器 -->
+<view class="label">选择分类：</view>
+<view class="multi-section">
+  <picker mode="multiSelector" class='multi_selector'  bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+    <view class='picker-result'>{{multiArray[0][multiIndex[0]]}}，{{multiArray[1][multiIndex[1]]}}</view>
+  </picker>
+  <view class="fa fa-caret-down" aria-hidden="true"></view>
+  <!-- 编辑按钮 -->
+  <button bindtap='edit_category' class='category-btn category-option-btn'><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+  <!-- 新增按钮 -->
+  <button bindtap='go_to_category_new' class='category-btn category-option-btn'><i class="fa fa-plus" aria-hidden="true"></i></button>
+  <!-- 删除按钮 -->
+  <button bindtap='delete_category_btn' class='category-btn category-delete-btn'><i class="fa fa-trash-o" aria-hidden="true"></i></button>
 </view>
 
-<view class='label'>小视频</view>
+<!-- 分类的CRUD  -->
+<!-- 新增、编辑分类使用的表单 -->
+<view sle='display: {{categoryFormDisplay}}' class="{{categoryFormDisplay == 'block' ? 'category-form-section' : 'category-form-section-hide'}}">
+  <view class="section-title">{{ categoryType == "edit" ? "编辑分类" : "新增分类"}}<i class="fa fa-sitemap" aria-hidden="true"></i></view>
+  <!-- 选择一级分类用的选择器 -->
+  <picker class='picker-input' bindchange="bindPickerChangeForCategoryNew" value="{{pickerIndex}}" range="{{category_new_title_arr}}">
+    <view class='picker-input-group'>
+    <view class='category-parent'>所属分类：</view>
+    <view class="picker-result">{{category_new_title_arr[pickerIndex]}}</view>
+    <view class="fa caret-2 fa-caret-down" aria-hidden="true"></view>
+    </view>
+  </picker>
+             <!-- 选取图片 -->
+  <view class='label'>图片：</view>
+  <view class='select-category-img'>
+    <image style='display: {{categoryImgDisplay}}' bindtap='select_category_image' class='category-img' src='{{selectedCategoryImgUrl}}'></image>
+    <view bindtap='select_category_image' class='select-item' style='display: {{categoryImgBtn}}' >+</view>
+  </view>
+             <!-- 表单 -->
+  <view class='category-input-group'>
+  <form bindsubmit="formSubmitForCategoryNew">
+    <view class='label'>名称：</view>
+    <input class='input-item' name="title" type='text' value='{{categoryTitleInput}}' placeholder="尽量四字内" confirm-type="search"></input>
+    <view class='label'>排序</view>
+    <slider class='category-slider' bindchange="change_category_weight" max='20' value="{{editCategoryWeight}}" show-value step='1'></slider>
+    <view class='category-submit-item'>
+      <button class='category-submit-btn' formType="submit">提交表单</button>
+      <button bindtap='hideForm' class='hide-category-form-btn'>收起<i class="fa fa-times" aria-hidden="true"></i>
+</button>
+    </view>
+  </form>
+</view>
+</view>
+
+
+
+
+
+<!-- 选取图片框 -->
+<view class='label'>产品图片：</view>
+<view class='img-selector'>
+    <block wx:if="{{previewImgUrl}}" wx:for="{{previewImgUrl}}">
+      <image bindtap='lookImage' data-index="{{index}}" src='{{item}}' class='preview-item' />
+    </block>
+  <view class="select-item" bindtap='select_image' >+</view>
+</view>
+<!-- 选取视频框 -->
+<view class='label'>小视频：</view>
 <view class='video-selector'>
   <view style="display: {{previewVideoDisplay}}" class='video-preview'>
-    <video src='{{previewVideoUrl}}' controls ></video>
+    <video class='video-player' src='{{previewVideoUrl}}' controls ></video>
     <view class='videoDetail'>
      <view class='video-detail-item'>视频长度：{{videoLength}} 秒</view>
      <view class='video-detail-item'>视频大小：{{videoSize / 1000000}} MB </view>
     </view>
   </view>
-  <button bindtap='select_video' class='select-btn' >+</button>
+  <view bindtap='select_video' stle='display: {{selectBtnDisplay}}' class='select-item select-video-btn' >+</view>
 </view>
 <!-- 输入表单 -->
 <form bindsubmit="formSubmit">
-  <view class='label-item'>产品名</view>
-  <input class='input-item' name="title" type='text' confirm-type="next"></input>
-  <view class='label-item'>副标题</view>
-  <input class='input-item' name="sub_title" type='text' confirm-type="next"></input>
-  <view class='label-item'>详情</view>
-  <input class='input-item' name="description" type='text' confirm-type="next"></input>
-  <view class='label-item'>价格</view>
-  <input class='input-item' name="price" type='digit' confirm-type="next"></input>
-  <view class="switch-item" wx:if="{{formHelperInStock}}">有现货？<switch checked bindchange="change_in_stock"/></view>
-  <view class="switch-item" wx:else>有现货？<switch bindchange="change_in_stock"/></view>
-  <view class="switch-item" wx:if="{{formHelperIsHide}}">暂时不上架<switch checked bindchange="change_is_hide"/></view>
-  <view class="switch-item" wx:else>暂时不上架<switch bindchange="change_is_hide"/></view>
-  <view class="switch-item" wx:if="{{formHelperIndexShow}}">在首页推广<switch checked bindchange="change_index_show"/></view>
-  <view class="switch-item" wx:else>在首页推广<switch bindchange="change_index_show"/></view>
-  <view class='search-info'><button formType="submit">提交数据</button></view>
+  <view class='label label-item'>产品名：</view>
+  <input class='input-item' name="title" type='text' value='{{productTitleInput}}' confirm-type="next"></input>
+  <view class='label label-item'>副标题：</view>
+  <input class='input-item' name="sub_title" type='text' value='{{productSubTitleInput}}' confirm-type="next"></input>
+  <view class='label label-item'>详情：</view>
+  <textarea class='input-item' name="description" type='text' value='{{productDescriptionInput}}' confirm-type="next"></textarea>
+  <view class='label label-item'>价格：</view>
+  <input class='input-item' name="price" type='digit' value='{{productPriceInput}}' confirm-type="next"></input>
+  <view class="label switch-item" wx:if="{{formHelperInStock}}">有现货？<switch color="#124C26" class='switch-input' checked bindchange="change_in_stock"/></view>
+  <view class="label switch-item" wx:else>有现货？<switch color="#124C26" class='switch-input' bindchange="change_in_stock"/></view>
+  <view class="label switch-item" wx:if="{{formHelperIsHide}}">暂时不上架？<switch color="#124C26" class='switch-input' checked bindchange="change_is_hide"/></view>
+  <view class="label switch-item" wx:else>暂时不上架？<switch color="#124C26" class='switch-input' bindchange="change_is_hide"/></view>
+  <view class="label switch-item" wx:if="{{formHelperIndexShow}}">在发现页推广？<switch color="#124C26" class='switch-input' checked bindchange="change_index_show"/></view>
+  <view class="label switch-item" wx:else>在发现页推广？<switch color="#124C26" class='switch-input' bindchange="change_index_show"/></view>
+
+  <view style='display: {{weight_slider_show}}' class='weight-slider'>
+    <view class='label'>在发现页的排序：</view>
+    <slider class='product-weight-slider' bindchange="change_weight" max='50' value="{{editProductWeight}}" show-value step='1'></slider>
+  </view>
+  <view class='submit-item'>
+  <button class='submit-btn' formType="submit">提交数据</button>
+  </view>
   
 </form>
+</view>

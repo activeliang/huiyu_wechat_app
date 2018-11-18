@@ -1,0 +1,18 @@
+<!--pages/category_new/new.wxml-->
+<!-- 新增分类 -->
+<view class="section">
+  <view class="section__title">新增分类</view>
+  <picker class='picker-input' bindchange="bindPickerChange" value="{{pickerIndex}}" range="{{title_arr}}">
+    <view class="picker">
+      所属分类：{{title_arr[pickerIndex]}}
+    </view>
+  </picker>
+             <!-- 表单 -->
+  <view class='category-input-group'>
+  <form bindsubmit="formSubmit">
+    <input class='title-input' name="title" type='text' placeholder="尽量四字内" focus confirm-type="search"></input>
+    <button formType="submit">新增</button>
+  </form>
+</view>
+</view>
+

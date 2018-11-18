@@ -2,16 +2,19 @@
 <!-- 引入模板 -->
 <import src="/pages/template/template.wxml"/>
 
+<view class='page-bc' style='height: {{windowH + 49}}px'>
 <!-- 搜索框组 -->
 <view class='search-group'>
-  <icon class='search-icon' type='search' size='20' ></icon>
-  <form bindsubmit="formSubmit">
-    <input class='search-input' name="searchKey" type='text' placeholder="搜索商品" focus confirm-type="search"></input>
-    <view class='search-info'><button formType="submit">搜索</button></view>
+  <form class='search-form' bindsubmit="searchformSubmit">
+    <view class='search-form-group'>
+      <view class="fa fa-search" aria-hidden="true"></view>
+      <input class='search-input' name="searchKey" type='text' placeholder="搜索商品" focus="{{focus}}" value='{{inputValue}}' confirm-type="search"></input>
+      <button class='search-info' formType="submit">搜索</button>
+    </view>
   </form>
 </view>
 <!-- 搜索的辅助（热搜等） -->
-<view class='search-helper' style='display={{helper-show}}'>
+<view wx:if="{{searchHelper}}" class='search-helper' style='display={{helper-show}}'>
   <view class='search-item-group'>
     <block wx:for="{{search-helper-item}}">
       <view class='helper-item'>{{item.title}}</view>
@@ -19,15 +22,23 @@
   </view>
 </view>
 <!-- 搜索历史记录 -->
-<view class='search-record'>
-<view class='helper-alert'>搜索历史</view>
-  <block wx:for="{{record}}">
-    <view class='record-item'>{{item.title}}</view>
-  </block>
-  <view class='destroy-record'>清空搜索记录</view>
-</view>
+<block wx:if="{{search_history}}">
+  <view class='helper-alert'>搜索历史</view>
+  <view class='search-record-group'>
+    <block wx:for="{{search_history}}">
+      <view bindtap='search_form_history' data-key="{{item}}" class='record-item'>{{item}}</view>
+    </block>
+    <view bindtap='destroy_history' class='record-item destroy-record'>清空历史记录</view>
+  </view>
+</block>
 <!-- 搜索结果列表 -->
-<view style='display: {{search_result_show}}' class='search-result'>
+<view wx:if="{{search_result != ''}}" class='search-result'>
     <template is="product_list" data="{{products: search_result}}"/>
-    <view class='search-empty'>{{searchPresent}}</view>
+</view>
+<!-- 当搜索结果为空时显示 -->
+<view wx:if="{{search_result == '' && search_history == ''}}" class='search-empty'>
+  <view class='alert-info'>没有找到相关商品</view>
+  <view bindtap='search_again' class='search-again-btn'>重新搜索</view>
+</view>
+
 </view>

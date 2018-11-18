@@ -1,0 +1,26 @@
+<!--pages/my_collects/index.wxml-->
+<!-- 引入模板 -->
+<import src="/pages/template/template.wxml"/>
+  <view class='title-slogan'>
+  <view class='category-title'><view class='line'></view>我的收藏<view class='line'></view></view>
+  </view>
+
+
+  <!-- 模板 产品列 -->
+  <view wx:if="{{my_collects}}">
+    <block wx:for="{{my_collects}}">
+      <view bindtap='navigationTo' data-id="{{item.id}}" class='product-item'>
+        <image class='product-image' src='{{item.image}}'></image>
+        <view class='product-detail'>
+          <view class='product-title'>{{item.title}}</view>
+          <view class='product-subtitle'>{{item.sub_title}}</view>
+          <view class='product-price'>{{item.price}} 元</view>
+          <view catchtap='delete_collect_product' data-title="{{item.title}}" data-id="{{item.id}}" class='edit-btn  delete-btn'>删除</view>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view wx:else class='no-collect-alert'>
+    <view class='alert-info'>您暂时当时收藏哦</view>
+    <view class='navigation-btn' bindtap='navigation_to_find_more'>去逛一圈~</view>
+  </view>

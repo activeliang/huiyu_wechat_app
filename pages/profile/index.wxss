@@ -1,0 +1,109 @@
+/* pages/profile/index.wxss */
+.background-img {
+  height: 222px;
+  width: 100%;
+  position: absolute;
+  z-index: -3;
+}
+
+.my-detail {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: flex-end;
+  color: #d7d7d7;
+}
+
+.admin-info {
+  text-align: center;
+  flex-grow: 3;
+  position: relative;
+/* left:20rpx; */
+  font-size: 22rpx;
+  color: #a2a2a2;
+}
+
+.wechat-user-avatar {
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 10px;
+  align-self: center;
+  border: 1rpx solid #666;
+}
+
+.nickname {
+  align-self: center;
+  font-size: 32rpx;
+  margin: 15rpx 30rpx;
+}
+
+.hide-btn {
+  position: absolute;
+  bottom: 25rpx;
+  color: #444;
+  padding: 30rpx;
+  right: 30rpx;
+}
+
+.fa-tasks {
+}
+
+.line-ui {
+}
+
+.backend-btn {
+  color: #666;
+  font-size: 34rpx;
+  background: #fff;
+  padding: 20rpx 20rpx 20rpx 40rpx;
+  border-top: 1rpx solid #d9d9d9;
+  border-bottom: 1rpx solid #d9d9d9;
+  transition: 1s ease;
+}
+
+.collect-btn {
+  background: #fff;
+  padding: 20rpx 20rpx 20rpx 40rpx;
+  margin-top: 10rpx;
+  border-top: 1rpx solid #d9d9d9;
+  border-bottom: 1rpx solid #d9d9d9;
+}
+
+.admin-alert {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  padding: 0 40rpx;
+  position: relative;
+}
+
+.container-profile {
+  padding-top: 20rpx;
+  background: #f8f8f8;
+  color: #666;
+  font-size: 34rpx;
+}
+
+.backend-btn-hide {
+  height: 0;
+  padding: 0;
+  position: fixed;
+  top: -35px;
+  transition: 1s ease;
+}
+
+.fa-cog {
+  color: #02B6C7;
+  margin: 0 20rpx;
+}
+
+.fa-cube {
+  color: #2dbe60;
+  margin: 0 20rpx;
+}
+
+.fa-chevron-right {
+  float: right;
+  position: relative;
+  line-height: 54rpx;
+  color: #2dbe60;
+}

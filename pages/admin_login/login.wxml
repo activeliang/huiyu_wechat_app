@@ -1,0 +1,23 @@
+<!--pages/admin_login/login.wxml-->
+<view id='stars'></view>
+<view id='stars2'></view>
+<view id='stars3'></view>
+<view id='title'>
+
+
+
+
+<view class='page-title'><i class="fa fa-bell-o" aria-hidden="true"></i>验证管理员权限</view>
+<view class='admin-login-form-group'>
+  <form class='login-form' bindsubmit="formSubmit">
+    <view class='login-form-input-all'>
+      <input class='phone-input' name="phone" type='number' placeholder="手机号" focus confirm-type="next"></input>
+      <input class='password-input' name="password" password type='text' placeholder="密码" focus confirm-type="done"></input>
+      <button class='login-btn' formType="submit">验证</button>
+    </view>
+  </form>
+</view>
+
+
+
+</view>

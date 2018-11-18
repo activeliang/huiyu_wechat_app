@@ -1,13 +1,19 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/logs/logs",
-    "pages/welcome/index",
+    "pages/find_more/index",
     "pages/category/category",
+    "pages/profile/index",
     "pages/product_list/list",
     "pages/product/detail",
+    "pages/admin_login/login",
+    "pages/admin/index",
+    "pages/product_new/new",
     "pages/search/search",
-    "pages/product_new/new"
+    "pages/category_new/new",
+    "pages/my_collects/index",
+    "pages/login_log/index",
+    "pages/test/test"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -16,22 +22,31 @@
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
+    "selectedColor": "#ec702e",
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "首页"
+        "text": "首页",
+        "iconPath": "img/06.png",
+        "selectedIconPath": "img/05.png"
       },
       {
-        "pagePath": "pages/logs/logs",
-        "text": "日志"
+        "pagePath": "pages/find_more/index",
+        "text": "发现",
+        "iconPath": "img/03.png",
+        "selectedIconPath": "img/04.png"
       },
       {
         "pagePath": "pages/category/category",
-        "text": "分类"
+        "text": "分类",
+        "iconPath": "img/01.png",
+        "selectedIconPath": "img/02.png"
       },
       {
-        "pagePath": "pages/product_new/new",
-        "text": "新增"
+        "pagePath": "pages/profile/index",
+        "text": "我的",
+        "iconPath": "img/08.png",
+        "selectedIconPath": "img/07.png"
       }
     ]
   },

@@ -1,1 +1,183 @@
 /* pages/search/search.wxss */
+.page-bc {
+  background: #f8f8f8;
+}
+
+.search-form {
+}
+
+.search-group {
+  background: #ec702e;
+  padding: 10rpx 15rpx;
+}
+
+.search-form-group {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.fa-search {
+  background: transparent;
+  height: 37rpx;
+  color: #b4b4b4;
+  font-weight: 100;
+  padding: 5rpx 12rpx;
+  position: absolute;
+}
+
+.search-input {
+  background: #fff;
+  flex-grow: 2;
+  border-radius: 8rpx;
+  padding-left: 55rpx;
+  font-size: 30rpx;
+}
+
+.search-info {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  line-height: 47rpx;
+  font-size: 29rpx;
+  padding: 0 10rpx 0 20rpx;
+  margin: 0;
+  color: #fff;
+  overflow: hidden;
+  margin-bottom: -10rpx;
+}
+
+.search-info button {
+}
+
+.search-result {
+  background: #fff;
+}
+
+button::after {
+  border: 0;
+}
+
+
+/* 以下是product_list的样式 */
+.line {
+  height: 1rpx;
+  background: #e3e3e3;
+  display: inline-block;
+  position: relative;
+  top: -12rpx;
+  width: 37rpx;
+  margin: 0 16rpx;
+}
+
+.category-title {
+  display: inline;
+  text-align: center;
+}
+
+.edit-btn {
+  float: right;
+  position: absolute;
+  right: 30rpx;
+  bottom: 8rpx;
+  background: #2dbe60;
+  padding: 5rpx 14rpx;
+  border: 1rpx solid #fff;
+  border-radius: 11rpx;
+  font-size: 25rpx;
+  color: #fff;
+}
+
+.delete-btn {
+  right: 130rpx;
+}
+
+/* 以下是模板的模式 */
+.product-item {
+  background: #fff;
+  padding: 15rpx 0;
+  border-bottom: 1rpx solid #f1f1f1;
+  margin: 0 28rpx;
+  position: relative;
+  display: flex;
+}
+
+.product-image {
+  max-width: 24%;
+  max-height: 150rpx;
+  float: left;
+  margin-right: 27rpx;
+}
+
+.product-detail {
+  font-size: 30rpx;
+  min-height: 150rpx;
+}
+
+.product-title {
+  font-size: 32rpx;
+  color: #222;
+  position: relative;
+/* top:-6rpx; */
+}
+
+.product-subtitle {
+  font-size: 26rpx;
+  color: #999;
+  top: -2rpx;
+/* max-height:64rpx; */
+}
+
+.product-price {
+  font-size: 28rpx;
+  color: #E67C3A;
+  position: relative;
+  top: 8rpx;
+}
+
+
+/* 以下是本页面自定样式  */
+.search-record-group {
+  background: #fff;
+  padding: 0 30rpx;
+  border-top: 1rpx solid #f1f1f1;
+  border-bottom: 1rpx solid #f1f1f1;
+}
+
+.helper-alert {
+  padding: 50rpx 0 5rpx 30rpx;
+  font-size: 25rpx;
+  color: #999;
+  font-weight: 300;
+}
+
+.record-item {
+  border-bottom: 1rpx solid #f1f1f1;
+  font-size: 28rpx;
+  color: #333;
+  padding: 25rpx 0;
+}
+
+.destroy-record {
+  text-align: center;
+  color: #3896FF;
+}
+
+.search-empty {
+  text-align: center;
+}
+
+.alert-info {
+  color: #999;
+  font-size: 28rpx;
+  padding-bottom: 30rpx;
+}
+
+.search-again-btn {
+  background: #ec702e;
+  color: #fff;
+  width: 85%;
+  margin: 0 auto;
+  font-size: 34rpx;
+  padding: 18rpx;
+  border-radius: 4px;
+}

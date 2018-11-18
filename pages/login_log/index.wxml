@@ -1,0 +1,25 @@
+<!--pages/login_log/index.wxml-->
+<view class='page-bc' style='height: {{windowH + 49}}px'>
+<view class='user-detail'>
+  <image class='user-avatar' src='{{user.avatar_url}}'></image>
+  <view class='user-nickname-localtion'>
+    <view class='user-nickname-gender'>
+      <view class='user-nickname'>昵称：{{user.nickname}}</view>
+      <image wx:if="{{user.gender == 1}}" class='user-gender-icon' src='../../img/man.png'></image>
+      <image wx:if="{{user.gender == 2}}" class='user-gender-icon' src='../../img/woman.png'></image>
+    </view>
+    <view class="user-localtion">地区：{{user.country}}/{{user.province}}/{{user.city}}</view>
+  </view>
+</view>
+<view class='alert-info'>提示：10分钟内打开多次小程序，只记录一次...</view>
+<view class='logs-group'>
+  <block wx:for="{{logs}}">
+    <view class="logs-item">
+      <view class='logs-date'>{{item.date}}</view>
+      <view class='logs-time-type'>{{item.time_type}}</view>
+      <view class='logs-time'>{{item.time}}</view>
+      <view class='logs-weekend'>{{item.weekday}}</view>
+    </view>
+  </block>
+</view>
+</view>
